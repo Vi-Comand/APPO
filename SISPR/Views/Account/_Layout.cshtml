@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="ru" class="bg-1 f-size16">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Вход/Регистрация - АППО (Автоматизированая платформа персонифицированного обучения Краснодарского края)</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+</head>
+<body class="bg-trans">
+
+    <div class="container ">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer  class="border-top footer text-muted bg-dark">
+        <div class="container">
+            &copy; 2021 - АППО
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    @*<script src="https://unpkg.com/vue@next"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

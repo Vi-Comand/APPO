@@ -1,0 +1,303 @@
+﻿/*body {
+    margin: 30px;
+}*/
+.f-size12 {
+    font-size: 12px;
+}
+
+.f-size14 {
+    font-size: 14px;
+}
+
+.f-size16 {
+    font-size: 16px;
+}
+
+.f-size18 {
+    font-size: 18px;
+}
+
+.f-size20 {
+    font-size: 20px;
+}
+
+.navbar1 {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: rgb(200, 255, 189);
+    background-image: none;
+    color: rgb(0, 0, 0);
+}
+
+.no-mode-fade-enter-active, .no-mode-fade-leave-active {
+    transition: opacity .5s
+}
+
+.no-mode-fade-enter-from, .no-mode-fade-leave-to {
+    opacity: 0
+}
+
+.bg-1 {
+    background-image: url("/file/f1.jpg");
+}
+
+.bg-trans {
+    background-color: transparent;
+}
+
+.bg-wh {
+    background-color: rgba(255, 255, 255, 0.89);
+}
+
+
+
+.logo-nav {
+    font: 700 3em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: .25em 0 .325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgba(255,255,255,.5);
+    /* Clip Background Image 
+    background-image: url('file:///C:\Users\kravchenko_v_e.IRO\Source\Repos\SISPR\SISPR\wwwroot\file\01.png');*/
+    background: url(../file/01.png) repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Animate Background Image */
+
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+    /* Activate hardware acceleration for smoother animations */
+
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+}
+
+@-webkit-keyframes aitf {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
+
+/*button {
+    background: #05ae7f;
+    border-radius: 4px;
+    display: inline-block;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}*/
+
+#stars {
+    /*background: #477ab9;*/
+    width: 100%;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    position: fixed;
+    z-index: -1;
+}
+
+    #stars:hover {
+        background: rgba(33, 161, 154, 0.5);
+    }
+
+
+/*---------------------------Главная тема----------------------------------*/
+.theme_color {
+    background-color: #21A19A;
+}
+
+    .theme_color:hover {
+        background-color: rgba(33, 161, 154, 0.70);
+    }
+
+    .theme_color:focus {
+        background-color: rgba(10, 125, 119, 0.88);
+    }
+
+.theme_bg_grad {
+    background: rgb(33,161,154);
+    background: linear-gradient(90deg, rgba(33,161,154,1) 0%, rgba(9,9,121,0) 10%, rgba(7,56,152,0) 90%, rgba(33,161,154,1) 100%);
+}
+/*---------------------------------------------------------------------------*/
+/*---------------------------Главная кнопка----------------------------------*/
+.btn-theme {
+    color: #fff;
+    background-color: #21A19A;
+    border-color: #21A19A;
+}
+
+    .btn-theme:hover {
+        color: #fff;
+        background-color: rgba(33, 161, 154, 0.70);
+        border-color: rgba(33, 161, 154, 0.70);
+    }
+
+    .btn-check:focus + .btn-theme, .btn-theme:focus {
+        color: #fff;
+        background-color: rgba(10, 125, 119, 0.88);
+        border-color: #0a7d77;
+        box-shadow: 0 0 0 0.25rem rgba(33, 161, 154, 0.5);
+    }
+
+    .btn-check:checked + .btn-theme, .btn-check:active + .btn-theme, .btn-theme:active, .btn-theme.active, .show > .btn-theme.dropdown-toggle {
+        color: #fff;
+        background-color: #197974;
+        border-color: #197974;
+    }
+
+        .btn-check:checked + .btn-theme:focus, .btn-check:active + .btn-theme:focus, .btn-theme:active:focus, .btn-theme.active:focus, .show > .btn-theme.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.35rem rgba(33, 161, 154, 0.7);
+        }
+
+    .btn-theme:disabled, .btn-theme.disabled {
+        color: #fff;
+        background-color: #21A19A;
+        border-color: #21A19A;
+    }
+
+/*---------------------------------------------------------------------------*/
+
+/*---------------------------Главная кнопка----------------------------------*/
+.inp-theme {
+    color: #033333;
+    border-color: #21A19A;
+}
+
+    .inp-theme:hover {
+        color: #033333;
+        background-color: rgba(226, 255, 254, 0.76);
+        border-color: rgba(33, 161, 154, 0.70);
+    }
+
+    .inp-check:focus + .inp-theme, .inp-theme:focus {
+        color: #033333;
+        /*background-color: rgba(226, 255, 254, 0.36);*/
+        border-color: #0a7d77;
+        box-shadow: 0 0 0 0.25rem rgba(33, 161, 154, 0.5);
+    }
+
+    .inp-check:checked + .inp-theme, .inp-check:active + .inp-theme, .inp-theme:active, .inp-theme.active, .show > .inp-theme.dropdown-toggle {
+        color: #033333;
+        background-color: rgba(226, 255, 254, 0.96);
+        border-color: #197974;
+    }
+
+        .inp-check:checked + .inp-theme:focus, .inp-check:active + .inp-theme:focus, .inp-theme:active:focus, .inp-theme.active:focus, .show > .inp-theme.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.35rem rgba(33, 161, 154, 0.7);
+        }
+
+    .inp-theme:disabled, .inp-theme.disabled {
+        color: #033333;
+        background-color: #21A19A;
+        border-color: #21A19A;
+    }
+
+/*---------------------------------------------------------------------------*/
+
+/*
+.text-shadow-8 {
+    color: white;
+    text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px crimson, 0 0 35px crimson, 0 0 40px crimson, 0 0 50px crimson, 0 0 75px crimson;
+}
+
+*/
+
+
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+/*a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}*/
+
+/* Provide sufficient contrast against white background */
+/*a {
+    color: #0366d6;
+}*/
+
+/*.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/*html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}*/
+
+/* Sticky footer styles
+-------------------------------------------------- */
+/*html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {*/
+/* Margin bottom by footer height */
+/*margin-bottom: 60px;
+}*/
+
+.footer {
+   /* position: absolute;*/
+    bottom: 0;
+    left: 0px;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
