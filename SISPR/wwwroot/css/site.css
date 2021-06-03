@@ -22,9 +22,11 @@
 }
 
 .navbar1 {
-    width: 80%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    padding-left:10%;
+    height:300px;
 }
 
 
@@ -43,9 +45,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .bg-1 {
-    background-image: url("/file/f1.jpg");
+    background-image: url("/file/f5.png");
 }
 
+.bg-nav {
+    background-image: url("/file/nav.png");
+}
 .bg-trans {
     background-color: transparent;
 }
@@ -105,7 +110,60 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-appearance: none;
     -moz-appearance: none;
 }*/
+/*------------------ссылка ---------------------------------------*/
+a {
+    color: #21a19a;
+    text-decoration: underline;
+}
 
+
+
+/*-------------------------------------------разделитель с анимацией--------------------------------------------------*/
+.hr {
+    border: none;
+    height: 3px;
+    margin: 30px 0;
+    background-image: linear-gradient(to right, #e6e6e6, #21a19a, #e6e6e6);
+}
+
+    .hr:not([size]) {
+        height: 3px;
+    }
+
+    .hr:before,
+    .hr:after {
+        content: '';
+        display: inline-block;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        border: 2px solid #21a19a;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #FFF;
+    }
+
+    .hr:after {
+        animation: anim-hr 1s linear infinite;
+    }
+
+@keyframes anim-hr {
+    0% {
+        width: 40px;
+        height: 40px;
+    }
+
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+
+
+
+
+/*--------------------------------звезды----------------------------------------------------------*/
 #stars {
     /*background: #477ab9;*/
     width: 100%;
@@ -179,7 +237,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 /*---------------------------------------------------------------------------*/
 
-/*---------------------------Главная кнопка----------------------------------*/
+/*---------------------------Тема инпут----------------------------------*/
 .inp-theme {
     color: #033333;
     border-color: #21A19A;
@@ -294,7 +352,7 @@ body {*/
 }*/
 
 .footer {
-   /* position: absolute;*/
+    /* position: absolute;*/
     bottom: 0;
     left: 0px;
     width: 100%;

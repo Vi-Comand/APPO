@@ -1,4 +1,4 @@
-﻿@ViewData["Title"] = "Авторизация - Автоматизированая платформа персонифицированного обучения Краснодарского края";
+﻿@*ViewData["Title"] = "Авторизация - Автоматизированая платформа персонифицированного обучения Краснодарского края";*@
 
 
 
@@ -6,7 +6,7 @@
 <form role="form" class="needs-validation text-center bg-wh w-50 m-auto mt-10 " style="max-width:500px; min-width:300px" novalidate>
     <div class="card-body shadow-lg container g-2 row">
         <div width="200" height="200">
-            <img width="200" height="200" src="~/file/logo200.png" />
+            <img width="200" height="200" src="~/file/logo.png" />
         </div>
         <h3>Институт развития образования Краснодарского края</h3>
         <div class="form-floating col-12">
@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-floating col-12 ">
-            <input type="password" class="form-control" id="passwordInput" placeholder="********" pattern=".{6,}" required>
+            <input type="password" class="form-control inp-theme" id="passwordInput" placeholder="********" pattern=".{6,}" required>
             <label for="passwordInput">Пароль</label>
             <div class="invalid-feedback">
                 Пароль должен состоять не меньше из 6 символов
@@ -34,12 +34,13 @@
             <button type="submit" class="btn btn-theme">Войти</button>
         </div>
         <div class="d-flex">
-            <div class="col me-2"><hr></div>
-            <div class="col-auto">ИЛИ</div>
-            <div class="col ms-2"><hr></div>
+            @* <div class="col me-2"><hr></div>
+        <div class="col-auto">ИЛИ</div>
+        <div class="col ms-2"><hr></div>*@
+            <hr class="hr col-12" />
         </div>
         <div class="form-group col-12">
-            <button type="submit" class="btn btn-outline-primary">Регистрация</button>
+            <button type="submit" class="btn btn-primary">Регистрация</button>
         </div>
     </div>
 </form>
