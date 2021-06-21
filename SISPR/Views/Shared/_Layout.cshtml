@@ -14,36 +14,44 @@
 
     <canvas id="stars"></canvas>
 
-    <nav class="navbar navbar-expand-lg navbar-light navbar1 text-white bg-nav">
-        <div class="container-fluid">
-            <a class="navbar-brand logo-nav" href="#"><img src="~/file/logo200.png" width="70" />ИРО КК</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Переключатель навигации">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse offset-md-3" id="navbarTogglerDemo02">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link btn btn-theme fs-3 text-white">
-                            <i class="bi bi-house "></i>
-                            Курсы
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link btn btn-theme fs-3 text-white">
-                            <i class="bi bi-person-square"></i> Профиль
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-action="Login" asp-controller="Account" class="nav-link btn btn-theme fs-3 text-white">
-                            <i class="bi bi-key"></i>
-                            Войти
-                        </a>
-                    </li>
-                </ul>
-                
+
+
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light navbar1 text-white bg-nav align-items-start">
+        <div class="container-fluid row justify-content-between ">
+            <div class="col-4 me-auto">
+                <a class="navbar-brand logo-nav " href="#"><img src="~/file/logo200.png" width="70" />ИРО КК</a>
             </div>
-        </div>
-    </nav>
+            <div class="col-8 text-end">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Переключатель навигации">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ms-auto" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link btn btn-theme fs-3 text-white">
+                                <i class="bi bi-house "></i>
+                                Курсы
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link btn btn-theme fs-3 text-white">
+                                <i class="bi bi-person-square"></i> Профиль
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-action="Login" asp-controller="Account" class="nav-link btn btn-theme fs-3 text-white">
+                                <i class="bi bi-key"></i>
+                                Войти
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+</nav>
 
 
 

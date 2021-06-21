@@ -1,9 +1,11 @@
-﻿@*ViewData["Title"] = "Авторизация - Автоматизированая платформа персонифицированного обучения Краснодарского края";*@
+﻿@{
+    ViewData["Title"] = "Авторизация";
+}
 
 
 
 
-<form role="form" class="needs-validation text-center bg-wh w-50 m-auto mt-10 " style="max-width:500px; min-width:300px" novalidate>
+<form role="form" method="post" class="needs-validation text-center bg-wh  " style="max-width:500px; min-width:300px" novalidate>
     <div class="card-body shadow-lg container g-2 row">
         <div width="200" height="200">
             <img width="200" height="200" src="~/file/logo.png" />
@@ -35,12 +37,12 @@
         </div>
         <div class="d-flex">
             @* <div class="col me-2"><hr></div>
-        <div class="col-auto">ИЛИ</div>
-        <div class="col ms-2"><hr></div>*@
+                <div class="col-auto">ИЛИ</div>
+                <div class="col ms-2"><hr></div>*@
             <hr class="hr col-12" />
         </div>
         <div class="form-group col-12">
-            <button type="submit" class="btn btn-primary">Регистрация</button>
+            <a asp-controller="Account" asp-action="Registration" class="btn btn-outline-primary">Регистрация</a>
         </div>
     </div>
 </form>

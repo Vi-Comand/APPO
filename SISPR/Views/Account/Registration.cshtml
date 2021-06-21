@@ -1,0 +1,110 @@
+﻿@{
+    ViewData["Title"] = "Регистрация";
+}
+
+
+
+
+<form role="form" class="needs-validation text-center bg-wh w-5   " style="max-width:1200px; min-width:400px" novalidate>
+    <div class="card-body shadow-lg container   overflow-hidden p-4">
+        <div class="row">
+            <div class="col-12 col-md-9 row-alt ">
+                <h5 class="col-12">Создайте аккаунт ИРО</h5>
+                @*<div class="row m-2">*@
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme" id="FaInput" placeholder="Иванов*" required>
+                    <label for="floatingInput">Фамилия</label>
+                    <div class="valid-feedback">
+                        Все хорошо!
+                    </div>
+                    <div class="invalid-feedback">
+                        Введите коректную фамилию
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme" id="ImInput" placeholder="Иван*" required>
+                    <label for="floatingInput">Имя</label>
+                    <div class="valid-feedback">
+                        Все хорошо!
+                    </div>
+                    <div class="invalid-feedback">
+                        Введите коректное имя
+                    </div>
+                </div>
+
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme" id="OtInput" placeholder="Иванович">
+                    <label for="floatingInput">Отчество</label>
+                    <div class="valid-feedback">
+                        Все хорошо!
+                    </div>
+                    <div class="invalid-feedback">
+                        Введите отчество при его наличии
+                    </div>
+                </div>
+                @*</div>
+                <div class="row m-2">*@
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="email" class="form-control inp-theme" id="emailInput" placeholder="name@example.com" required>
+                    <label for="floatingInput">Адрес электронной почты</label>
+                    <div class="valid-feedback">
+                        Все хорошо!
+                    </div>
+                    <div class="invalid-feedback">
+                        Введите коректный адрес электронной почты
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="password" class="form-control inp-theme" id="passwordInput" placeholder="********" pattern=".{6,}" required>
+                    <label for="passwordInput">Пароль</label>
+                    <div class="invalid-feedback">
+                        Пароль должен состоять не меньше из 6 символов
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="password" class="form-control inp-theme" id="passwordCheckInput" placeholder="********" pattern=".{6,}" required>
+                    <label for="passwordInput">Подтвердите пароль</label>
+                    <div class="invalid-feedback">
+                        Пароль не совподает
+                    </div>
+                </div>
+                @*</div>*@
+               
+                    <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
+              
+                    <button type="submit" class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
+              
+            </div>
+            <div class="col-3 reg">
+                <div width="200" height="200">
+                    <img width="200" height="200" class="img-card-home" src="~/file/logo.png" />
+                </div>
+                <p>Один аккаунт - для всех сервисов Института развития образования Краснодарского края</p>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    // Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
+    (function () {
+        'use strict'
+
+        // Получите все формы, к которым мы хотим применить пользовательские стили проверки Bootstrap
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Зацикливайтесь на них и предотвращайте отправку
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
