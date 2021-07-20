@@ -34,7 +34,7 @@
         </div>
         <div class="col">
             <div class="card ">
-                <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
+                <img src="~/file/b3.png" width="200" height="200" class="card-img-top img-card-home" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Конкурсы</h5>
                     <p class="card-text">Принять участие в конкурсе</p>
@@ -46,17 +46,22 @@
         </div>
         <div class="col">
 
+
             <div class="card ">
                 @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
-                <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Личный кабинет</h5>
-                    <p class="card-text">Ваше портфолио и достижения</p>
-                </div>
+                <a asp-action="Profil" asp-controller="Home" class="a">
+                    <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
+
+                    <div class="card-body">
+                        <h4 class="card-title">Личный кабинет</h4>
+                        <p class="card-text text-black-100">Ваше портфолио и достижения</p>
+                    </div>
+                </a>
                 <div class="card-footer">
                     <small class="text-muted">Необходимо загрузить данные</small>
                 </div>
             </div>
+
 
         </div>
         <div class="col">

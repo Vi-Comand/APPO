@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SISPR.Models;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SISPR.Controllers
 {
@@ -22,7 +18,12 @@ namespace SISPR.Controllers
         {
             ErrorViewModel model = new ErrorViewModel();
             model.RequestId = "Работай";
-            return View("Index",model);
+            return View("Index", model);
+        }
+
+        public IActionResult Profil()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

@@ -5,10 +5,10 @@
 
 
 
-<form role="form" class="needs-validation text-center bg-wh w-5   " style="max-width:1200px; min-width:400px" novalidate>
+<form role="form" class="needs-validation text-center bg-wh w-5   " style="max-width:1200px; min-width:400px" id="contact-form" novalidate>
     <div class="card-body shadow-lg container   overflow-hidden p-4">
         <div class="row">
-            <div class="col-12 col-md-9 row-alt ">
+            <div class="col-12 col-md-9 row-alt " id="div_first">
                 <h5 class="col-12">Создайте аккаунт ИРО</h5>
                 @*<div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 @*</div>
-                <div class="row m-2">*@
+                    <div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <input type="email" class="form-control inp-theme" id="emailInput" placeholder="name@example.com" required>
                     <label for="floatingInput">Адрес электронной почты</label>
@@ -58,7 +58,7 @@
                     <input type="password" class="form-control inp-theme" id="passwordInput" placeholder="********" pattern=".{6,}" required>
                     <label for="passwordInput">Пароль</label>
                     <div class="invalid-feedback">
-                        Пароль должен состоять не меньше из 6 символов
+                        Пароль должен состоять не менее чем из 6 символов
                     </div>
                 </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
@@ -69,12 +69,155 @@
                     </div>
                 </div>
                 @*</div>*@
-               
-                    <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
-              
-                    <button type="submit" class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
-              
+
+                <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
+
+                <button type="submit" class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
+
             </div>
+
+            <div class="col-12 col-md-9 row-alt d-none" id="div_second">
+                <h5 class="col-12">Создайте аккаунт ИРО</h5>
+                @*<div class="row m-2">*@
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                        <option selected>Выберите регион</option>
+                        <option value="23">Краснодарский край</option>
+                        <option value="69">Ростовская область</option>
+                        <option value="26">Ставропольский край</option>
+                    </select>
+                    <label for="regionInput">Регион</label>
+                    <div class="invalid-feedback">
+                        Выберите регион
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
+                        <option selected>Выберите МО</option>
+                        <option value="23">Краснодар</option>
+                        <option value="69">Сочи</option>
+                        <option value="26">Кущевский район</option>
+                    </select>
+                    <label for="moInput">МО</label>
+                    <div class="invalid-feedback">
+                        Выберите муниципалитет
+                    </div>
+                </div>
+
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                    <label for="cityInput">Населенный пункт</label>
+                    <div class="invalid-feedback">
+                        Введите отчество при его наличии
+                    </div>
+                </div>
+                @*</div>
+                    <div class="row m-2">*@
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="email" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                    <label for="ooInput">Краткое наименование ОО</label>
+                    <div class="invalid-feedback">
+                        Введите краткое наименование ОО
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
+                    <label for="telInput">Телефон</label>
+                    <div class="invalid-feedback">
+                        Пароль должен состоять не менее чем из 6 символов
+                    </div>
+                </div>
+                <script>
+                    $('.mask-phone').mask('+7 (999) 999-99-99');
+                </script>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme mask-snils" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
+                    <label for="snilsInput">СНИЛС</label>
+                    <div class="invalid-feedback">
+                        Пароль не совподает
+                    </div>
+                </div>
+                <script>
+                    $('.mask-snils').mask('999-999-999 99');
+                </script>
+
+                <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
+
+                <button type="submit" class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
+
+            </div>
+
+            <div class="col-12 col-md-9 row-alt d-none" id="div_third">
+                <h5 class="col-12">Создайте аккаунт ИРО</h5>
+                @*<div class="row m-2">*@
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                        <option selected>Выберите регион</option>
+                        <option value="23">Краснодарский край</option>
+                        <option value="69">Ростовская область</option>
+                        <option value="26">Ставропольский край</option>
+                    </select>
+                    <label for="regionInput">Регион</label>
+                    <div class="invalid-feedback">
+                        Выберите регион
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
+                        <option selected>Выберите МО</option>
+                        <option value="23">Краснодар</option>
+                        <option value="69">Сочи</option>
+                        <option value="26">Кущевский район</option>
+                    </select>
+                    <label for="moInput">МО</label>
+                    <div class="invalid-feedback">
+                        Выберите муниципалитет
+                    </div>
+                </div>
+
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                    <label for="cityInput">Населенный пункт</label>
+                    <div class="invalid-feedback">
+                        Введите отчество при его наличии
+                    </div>
+                </div>
+                @*</div>
+                    <div class="row m-2">*@
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="email" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                    <label for="ooInput">Краткое наименование ОО</label>
+                    <div class="invalid-feedback">
+                        Введите краткое наименование ОО
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
+                    <label for="telInput">Телефон</label>
+                    <div class="invalid-feedback">
+                        Пароль должен состоять не менее чем из 6 символов
+                    </div>
+                </div>
+                <script>
+                    $('.mask-phone').mask('+7 (999) 999-99-99');
+                </script>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme mask-snils" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
+                    <label for="snilsInput">СНИЛС</label>
+                    <div class="invalid-feedback">
+                        Пароль не совподает
+                    </div>
+                </div>
+                <script>
+                    $('.mask-snils').mask('999-999-999 99');
+                </script>
+
+                <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
+
+                <button type="submit" class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
+
+            </div>
+
             <div class="col-3 reg">
                 <div width="200" height="200">
                     <img width="200" height="200" class="img-card-home" src="~/file/logo.png" />
@@ -85,9 +228,11 @@
     </div>
 </form>
 
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
     // Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
+
+
     (function () {
         'use strict'
 
@@ -95,16 +240,38 @@
         var forms = document.querySelectorAll('.needs-validation')
 
         // Зацикливайтесь на них и предотвращайте отправку
+
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
                 form.addEventListener('submit', function (event) {
                     if (!form.checkValidity()) {
                         event.preventDefault()
                         event.stopPropagation()
+                        alert(1);
+                        form.classList.add('was-validated')
                     }
+                    else {
 
-                    form.classList.add('was-validated')
+                        alert(2);
+                        next()
+                        form.classList.remove('was-validated')
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    //form.classList.add('was-validated')
                 }, false)
             })
+
+
+
     })()
+
+    function next() {
+        var DivFirst = document.getElementById('div_first');
+        var DivSecond = document.getElementById('div_second'); regInput
+        var regInput = document.getElementById('regInput');
+        DivFirst.classList.add("d-none");
+        DivSecond.classList.remove("d-none");
+        $('#regionInput').prop('required', true)
+    }
 </script>

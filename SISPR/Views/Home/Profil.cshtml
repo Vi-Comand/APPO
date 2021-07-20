@@ -1,0 +1,160 @@
+﻿@model SISPR.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Home Page";
+
+}
+
+<div class="col-12 shadow p-3 mb-5 bg-white rounded ">
+
+    <div class="row">
+        <div class="col-8">
+            <h4>Основная информация</h4>
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Фамилия</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Имя</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Отчество</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Должность</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">СНИЛС</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme mask-snils" id="inputEmail3">
+                </div>
+                <script>
+                    $('.mask-snils').mask('999-999-999 99');
+                </script>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Телефон</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme mask-phone" id="inputEmail3">
+                </div>
+                <script>
+                    $('.mask-phone').mask('+7 (999) 999-99-99');
+                </script>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">E-mail</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <figure class="card info-bottom">
+                <img src="~/file/profil1.png" class="col-12" />
+                <figcaption>
+
+                    <h5 class="text-center">Изменить фотографию</h5>
+
+
+                </figcaption>
+            </figure>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-8">
+            <h4>Адресс и организация</h4>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Регион</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                        <option value="23">Краснодарский край</option>
+                        <option value="69">Ростовская область</option>
+                        <option value="26">Ставропольский край</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">МО</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
+                        <option value="23">Краснодар</option>
+                        <option value="69">Сочи</option>
+                        <option value="26">Кущевский район</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Населенный пункт</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                </div>
+            </div>
+            @*</div>
+                <div class="row m-2">*@
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="ooInput">Краткое наименование ОО</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <h4>Опции</h4>
+            <ul id="yui_3_17_2_1_1626761899275_19"><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=today">Сегодняшние события</a></span></li><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=all">Все события</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=outline">Краткий отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=complete">Полный отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/stats/user.php?id=5563&amp;course=1">Статистика</a></span></li><li><span><a href="http://do.iro23.ru/report/usersessions/user.php">Сессии браузера</a></span></li><li><span><a href="http://do.iro23.ru/grade/report/overview/index.php?userid=5563&amp;id=1">Обзор оценок</a></span></li><li><span><a href="http://do.iro23.ru/course/user.php?mode=grade&amp;id=1&amp;user=5563">Оценка</a></span></li></ul>
+        </div>
+    </div>
+
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-3 pt-0">Radios</legend>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <label class="form-check-label" for="gridRadios1">
+                    First radio
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                <label class="form-check-label" for="gridRadios2">
+                    Second radio
+                </label>
+            </div>
+            <div class="form-check disabled">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                <label class="form-check-label" for="gridRadios3">
+                    Third disabled radio
+                </label>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row mb-3">
+        <div class="col-sm-9 offset-sm-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1">
+                    Example checkbox
+                </label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign in</button>
+
+</div>
+<div id="polygon1"></div>
+<script src="~/js/three.min.js"></script>
+<script src="~/js/zoom-polygon.js"></script>
