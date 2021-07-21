@@ -1,6 +1,6 @@
 ﻿@model SISPR.Models.ErrorViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Профиль";
 
 }
 
@@ -59,16 +59,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <figure class="card info-bottom">
-                <img src="~/file/profil1.png" class="col-12" />
-                <figcaption>
+        <div class="col-4 justify-content-center">
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <figure class=" card info-bottom  top-50 start-50 translate-middle">
+                    <img src="~/file/prof-vi.jpg" class="col-12" />
+                    <figcaption>
 
-                    <h5 class="text-center">Изменить фотографию</h5>
+                        <h5 class="text-center">Изменить фотографию</h5>
 
 
-                </figcaption>
-            </figure>
+                    </figcaption>
+                </figure>
+            </a>
         </div>
     </div>
     <br />
@@ -157,4 +159,32 @@
 </div>
 <div id="polygon1"></div>
 <script src="~/js/three.min.js"></script>
-<script src="~/js/zoom-polygon.js"></script>
+@*<script src="~/js/zoom-polygon.js"></script>*@
+
+
+<!-- Modal загрузка фото -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form asp-action="AddFile" asp-controller="UploadFile" method="post" enctype="multipart/form-data">
+                <div class="modal-header body">
+                    <h5 class="modal-title" id="exampleModalLabel">Загрузите фотографию</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body body">
+
+                    @*<input type="file" name="uploads" multiple="multiple" /><br>*@
+                    <div class="file-drop-area">
+                        <span class="fake-btn">Выберите файл</span>
+                        <span class="file-msg">или перенесите сюда</span>
+                        <input class="file-input" name="uploads" type="file">
+                    </div>
+                </div>
+                <div class="modal-footer body">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

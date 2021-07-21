@@ -1,6 +1,6 @@
 ﻿@model SISPR.Models.ErrorViewModel
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Главная";
 
 }
 
@@ -10,11 +10,13 @@
     <div class="row row-cols-1 row-cols-md-3 g-3">
         <div class="col">
             <div class="card ">
-                <img src="~/file/b1.jpeg" width="400" height="200" class="card-img-top img-card-home" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title theme_text_color"><b>КУРСЫ</b></h5>
-                    <p class="card-text">Регистрация на курсы</p>
-                </div>
+                <a asp-action="AddCourse" asp-controller="Course" class="a">
+                    <img src="~/file/b1.jpeg" width="400" height="200" class="card-img-top img-card-home" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title "><b>КУРСЫ</b></h5>
+                        <p class="card-text text-black-100">Регистрация на курсы</p>
+                    </div>
+                </a>
                 <div class="card-footer">
                     <small class="text-muted">Вы участвуете в <b>2х</b> курсах</small>
                 </div>
@@ -49,7 +51,7 @@
 
             <div class="card ">
                 @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
-                <a asp-action="Profil" asp-controller="Home" class="a">
+                <a asp-action="Profile" asp-controller="LK" class="a">
                     <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
 
                     <div class="card-body">

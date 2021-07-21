@@ -1,0 +1,342 @@
+﻿@model SISPR.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Добавить курс";
+
+}
+
+<div class="col-12 shadow p-3 mb-5 bg-white rounded ">
+
+    <div class="row">
+        <div class="col-12 col-lg-7">
+            <h4>Добавление курса курса</h4>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">УТП</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
+                        <option selected>Выберите УТП</option>
+                        <option value="23">Униф. УП 8 часа ДО вх</option>
+                        <option value="69">Униф. УП 48 часа </option>
+                        <option value="26">Униф. УП 108 часа ДО вх</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control inp-theme" id="dateN" required onchange="var dk = document.getElementById('dateK').value; if (dk != 0) {if(this.value>= dk){alert('Дата окончания меньше или равна дате начала');} }">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control inp-theme" id="dateK" required onblur="var dn = document.getElementById('dateN').value; if (this.value <= dn) {
+    alert('Дата окончания меньше или равна дате начала');  }">
+                    <div class="invalid-feedback">
+                        Некоректная дата
+                    </div>
+                </div>
+            </div>
+            <script>
+                /*  document.addEventListener('DOMContentLoaded', function () {
+                      var dn = document.getElementById("dateN");
+                      var dk = document.getElementById("dateK");
+                      var w = moment().format('YYYY-MM-DDTHH:MM');
+                      var ww = moment(w).add(1, 'h').format('YYYY-MM-DDTHH:MM');
+                      if (dn.value == '0001-01-01T00:00:00.000') { dn.value = w; }
+                      if (dk.value == '0001-01-01T00:00:00.000') { dk.value = ww; }
+                  });*/
+            </script>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Реализация ДПП ПК</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Тема курсов</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Объем курсов</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme mask-snils" id="inputEmail3">
+                </div>
+                <script>
+                    $('.mask-snils').mask('999-999-999 99');
+                </script>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Место проведения</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme mask-phone" id="inputEmail3">
+                </div>
+                <script>
+                    $('.mask-phone').mask('+7 (999) 999-99-99');
+                </script>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Кафедра</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                        <option selected>Выберите кафедру</option>
+                        <option value="23">КФО</option>
+                        <option value="69">ИАЦ</option>
+                        <option value="26">КМИ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Квота</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Краткое описание</label>
+                <div class="col-sm-8">
+                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                        <option selected>Выберите кафедру</option>
+                        <option value="23">КФО</option>
+                        <option value="69">ИАЦ</option>
+                        <option value="26">КМИ</option>
+                    </select>
+                </div>
+                <>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Краткое описание</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 col-lg-5 justify-content-center">
+            <h4>Информация о УТП</h4>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>Тип</td>
+                        <td>Значение</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Название</td>
+                        <td>Униф. УП 108 часа ДО вх</td>
+                    </tr>
+                    <tr>
+                        <td>Количество слушателей в группе:</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>Количество групп:</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Количество подгрупп:</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>Форма обучения:</td>
+                        <td>очно-заочная, с использованием дистанционных образовательных технологий и/или электронного </td>
+                    </tr>
+                    <tr>
+                        <td>Режим занятий:</td>
+                        <td>8 часов</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>Вид учебной нагрузки</td>
+                        <td><p class="vert">Кол_часов</p></td>
+                        <td><p class="vert">Кол_групп</p></td>
+                        <td><p class="vert">Кол_подгрупп</p></td>
+                        <td><p class="vert">Кол_форм_контр.</p></td>
+                        <td><p class="vert">Кол_слушателей</p></td>
+                        <td><p class="vert">Объем_учеб._нагруз.</p></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" class="text-xl-center table-light">Дистанциооный модуль</td>
+
+                    </tr>
+                    <tr>
+                        <td>Лекции</td>
+                        <td>10</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="text-xl-center table-primary">Аудиторная нагрузка</td>
+                    </tr>
+                    <tr>
+                        <td>Лекции</td>
+                        <td>12</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td>Практические занятия </td>
+                        <td>48</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>48</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="text-xl-center table-secondary">Внеаудиторная нагрузка</td>
+                    </tr>
+                    <tr>
+                        <td>Учебно-методическое руководство (в т.ч. организационное) </td>
+                        <td>0,88</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>25</td>
+                        <td>22</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="table-dark">
+                        <td>Всего</td>
+                        <td>70,88</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>82</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-8">
+            <h4>Адресс и организация</h4>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Регион</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                        <option value="23">Краснодарский край</option>
+                        <option value="69">Ростовская область</option>
+                        <option value="26">Ставропольский край</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">МО</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
+                        <option value="23">Краснодар</option>
+                        <option value="69">Сочи</option>
+                        <option value="26">Кущевский район</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Населенный пункт</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                </div>
+            </div>
+            @*</div>
+                <div class="row m-2">*@
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label" for="ooInput">Краткое наименование ОО</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                </div>
+
+            </div>
+        </div>
+        <div class="col-4">
+            <h4>Опции</h4>
+            <ul id="yui_3_17_2_1_1626761899275_19"><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=today">Сегодняшние события</a></span></li><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=all">Все события</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=outline">Краткий отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=complete">Полный отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/stats/user.php?id=5563&amp;course=1">Статистика</a></span></li><li><span><a href="http://do.iro23.ru/report/usersessions/user.php">Сессии браузера</a></span></li><li><span><a href="http://do.iro23.ru/grade/report/overview/index.php?userid=5563&amp;id=1">Обзор оценок</a></span></li><li><span><a href="http://do.iro23.ru/course/user.php?mode=grade&amp;id=1&amp;user=5563">Оценка</a></span></li></ul>
+        </div>
+    </div>
+
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-3 pt-0">Radios</legend>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                <label class="form-check-label" for="gridRadios1">
+                    First radio
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                <label class="form-check-label" for="gridRadios2">
+                    Second radio
+                </label>
+            </div>
+            <div class="form-check disabled">
+                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                <label class="form-check-label" for="gridRadios3">
+                    Third disabled radio
+                </label>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row mb-3">
+        <div class="col-sm-9 offset-sm-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck1">
+                <label class="form-check-label" for="gridCheck1">
+                    Example checkbox
+                </label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" id="Add_Batoon">Добавить курс</button>
+
+</div>
+<div id="polygon1"></div>
+<script src="~/js/three.min.js"></script>
+@*<script src="~/js/zoom-polygon.js"></script>*@
+
+
+<!-- Modal загрузка фото -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form asp-action="AddFile" asp-controller="UploadFile" method="post" enctype="multipart/form-data">
+                <div class="modal-header body">
+                    <h5 class="modal-title" id="exampleModalLabel">Загрузите фотографию</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body body">
+
+                    @*<input type="file" name="uploads" multiple="multiple" /><br>*@
+                    <div class="file-drop-area">
+                        <span class="fake-btn">Выберите файл</span>
+                        <span class="file-msg">или перенесите сюда</span>
+                        <input class="file-input" name="uploads" type="file">
+                    </div>
+                </div>
+                <div class="modal-footer body">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
