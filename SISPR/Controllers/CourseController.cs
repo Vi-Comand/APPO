@@ -20,6 +20,11 @@ namespace SISPR.Controllers
             return View();
         }
 
+        public IActionResult CreateRaspisan()
+        {
+            return View();
+        }
+
 
     }
 }
