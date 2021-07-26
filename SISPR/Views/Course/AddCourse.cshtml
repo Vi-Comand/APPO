@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-12 col-lg-7">
-            <h4>Добавление курса курса</h4>
+            <h4>Добавление курса</h4>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">УТП</label>
                 <div class="col-sm-9">
@@ -17,6 +17,26 @@
                         <option value="23">Униф. УП 8 часа ДО вх</option>
                         <option value="69">Униф. УП 48 часа </option>
                         <option value="26">Униф. УП 108 часа ДО вх</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Форма обучения</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
+                        <option selected>Выберите форму обучения</option>
+                        <option value="23">Бюджетная</option>
+                        <option value="69">Внебюджетная</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">ПК/ПКП</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
+                        <option selected>Выберите </option>
+                        <option value="23">Повышение квалификации</option>
+                        <option value="69">Переподготовка</option>
                     </select>
                 </div>
             </div>
@@ -77,6 +97,37 @@
                     $('.mask-phone').mask('+7 (999) 999-99-99');
                 </script>
             </div>
+
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Квота</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. групп</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. подгрупп</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. слушателей в группе</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Категория слушателей</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кафедра</label>
                 <div class="col-sm-9">
@@ -89,27 +140,32 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Квота</label>
-                <div class="col-sm-9">
-                    <input type="email" class="form-control inp-theme" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Краткое описание</label>
-                <div class="col-sm-8">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Руководитель курса</label>
+                <div class="col-sm-7">
                     <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option selected>Выберите кафедру</option>
-                        <option value="23">КФО</option>
-                        <option value="69">ИАЦ</option>
-                        <option value="26">КМИ</option>
+                        <option selected>Выберите педагога</option>
+                        <option value="23">Белай</option>
+                        <option value="69">Ивко</option>
+                        <option value="26">Мокеева</option>
                     </select>
                 </div>
-                <>
+                <div class="col-sm-2">
+                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Телефон</label>
+                <div class="col-sm-6">
+                    <input type="tel" class="form-control inp-theme" disabled id="inputEmail3" value="8-961-4545-573-457">
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Изменить</a>
+                </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Краткое описание</label>
                 <div class="col-sm-9">
-                    <input type="email" class="form-control inp-theme" id="inputEmail3">
+                    <textarea class="form-control inp-theme" id="inputEmail3" rows="7"></textarea>
                 </div>
             </div>
 
@@ -151,7 +207,7 @@
                 </tbody>
             </table>
 
-            <table class="table table-hover">
+            <table class="table table-hover bg-white">
                 <thead>
                     <tr>
                         <td>Вид учебной нагрузки</td>
