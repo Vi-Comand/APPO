@@ -1,6 +1,6 @@
 ﻿@model SISPR.Models.ErrorViewModel
 @{
-    ViewData["Title"] = "Добавить курс";
+    ViewData["Title"] = "Создание расписания";
 
 }
 
@@ -8,9 +8,9 @@
 
     <div class="row">
         <div class="col-12 col-lg-7">
-            <h4>Добавление курса</h4>
+            <h4>Наполнение расписания</h4>
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">УТП</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Вид нагрузки</label>
                 <div class="col-sm-9">
                     <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
                         <option selected>Выберите УТП</option>
@@ -20,133 +20,51 @@
                     </select>
                 </div>
             </div>
+            @* Если аудиторная--------------------------- *@
+            <input type="text" value="Дата начала курсов" id="dateN" />
+            <input type="text" value="Дата окончания курсов" id="dateK" />
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Форма обучения</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Дата проведения</label>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control inp-theme" id="datePr" required onchange="var dk = document.getElementById('dateK').value; if (dk != 0) {if(this.value>= dk){alert('Дата окончания меньше или равна дате начала');} }">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Время проведения</label>
                 <div class="col-sm-9">
                     <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
-                        <option selected>Выберите форму обучения</option>
-                        <option value="23">Бюджетная</option>
-                        <option value="69">Внебюджетная</option>
+                        <option selected>Выберите время</option>
+                        <option value="1">08:00-09:30</option>
+                        <option value="2">09:35-11:05</option>
+                        <option value="3">11:10-12:40</option>
+                        <option value="4">12:45-14:15</option>
+                        <option value="5">14:30-16:00</option>
+                        <option value="6">16:05-17:35</option>
+                        <option value="7">17:40-19:10</option>
+                        <option value="8">19:15-20:45</option>
                     </select>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">ПК/ПКП</label>
-                <div class="col-sm-9">
-                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
-                        <option selected>Выберите </option>
-                        <option value="23">Повышение квалификации</option>
-                        <option value="69">Переподготовка</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
-                <div class="col-sm-9">
-                    <input type="date" class="form-control inp-theme" id="dateN" required onchange="var dk = document.getElementById('dateK').value; if (dk != 0) {if(this.value>= dk){alert('Дата окончания меньше или равна дате начала');} }">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
-                <div class="col-sm-9">
-                    <input type="date" class="form-control inp-theme" id="dateK" required onblur="var dn = document.getElementById('dateN').value; if (this.value <= dn) {
-    alert('Дата окончания меньше или равна дате начала');  }">
-                    <div class="invalid-feedback">
-                        Некоректная дата
-                    </div>
-                </div>
-            </div>
-            <script>
-                /*  document.addEventListener('DOMContentLoaded', function () {
-                      var dn = document.getElementById("dateN");
-                      var dk = document.getElementById("dateK");
-                      var w = moment().format('YYYY-MM-DDTHH:MM');
-                      var ww = moment(w).add(1, 'h').format('YYYY-MM-DDTHH:MM');
-                      if (dn.value == '0001-01-01T00:00:00.000') { dn.value = w; }
-                      if (dk.value == '0001-01-01T00:00:00.000') { dk.value = ww; }
-                  });*/
-            </script>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Реализация ДПП ПК</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Тема</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control inp-theme" id="inputEmail3">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Аудитория</label>
+                <div class="col-sm-9">
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
+                        <option selected>Выберите аудиторию</option>
+                        <option value="1">101</option>
+                        <option value="2">102</option>
+
+                    </select>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Тема курсов</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Объем курсов</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme mask-snils" id="inputEmail3">
-                </div>
-                <script>
-                    $('.mask-snils').mask('999-999-999 99');
-                </script>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Место проведения</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control inp-theme " id="inputEmail3">
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Квота</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. групп</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. подгрупп</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. слушателей в группе</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Категория слушателей</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Кафедра</label>
-                <div class="col-sm-7">
-                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option selected>Выберите кафедру</option>
-                        <option value="23">КФО</option>
-                        <option value="69">ИАЦ</option>
-                        <option value="26">КМИ</option>
-                    </select>
-                </div>
-                <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Руководитель курса</label>
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Преподаватель</label>
                 <div class="col-sm-7">
                     <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
                         <option selected>Выберите педагога</option>
@@ -159,24 +77,8 @@
                     <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
                 </div>
             </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Телефон</label>
-                <div class="col-sm-6">
-                    <input type="tel" class="form-control inp-theme" disabled id="inputEmail3" value="8-961-4545-573-457">
-                </div>
-                <div class="col-sm-3">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Изменить</a>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Краткое описание</label>
-                <div class="col-sm-9">
-                    <textarea class="form-control inp-theme" id="inputEmail3" rows="7"></textarea>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <a class="btn btn-theme" asp-action="CreateRaspisan" asp-controller="Course">Сохранить и заполнить расписание</a>
-            </div>
+
+
         </div>
         <div class="col-12 col-lg-5 justify-content-center">
             <h4>Информация о УТП</h4>
