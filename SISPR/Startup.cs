@@ -8,7 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Razor;
+using Microsoft.EntityFrameworkCore;
+using SISPR.Models.DataBase;
+using SISPR.Models.DataBase.Basic.User;
 
 namespace SISPR
 {
@@ -24,7 +28,25 @@ namespace SISPR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = "server=localhost;user=root;password=123456;database=iro23_appo"; // Replace with your server version and type.
+            // Use 'MariaDbServerVersion' for MariaDB.
+            // Alternatively, use 'ServerVersion.AutoDetect(connectionString)'.
+            // For common usages, see pull request #1233.
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 25)); // Replace 'YourDbContext' with the name of your own DbContext derived class.
+
+            services.AddDbContext<IdentityContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion).EnableSensitiveDataLogging()); // <-- These two calls are optional but help .EnableDetailedErrors() //   );
+
+
+
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+
             services.AddControllersWithViews();
+
+          services.AddDbContext<Context>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion).EnableSensitiveDataLogging()); // <-- These two calls are optional but help .EnableDetailedErrors() //   );
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
