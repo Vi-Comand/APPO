@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using SISPR.Controllers.Service;
 using SISPR.Models.DataBase;
 
 namespace SISPR.Controllers
@@ -40,7 +41,26 @@ namespace SISPR.Controllers
         }
 
 
+        public async Task<IActionResult> ConfirmedEmailAjax(string Email)
+        {
+            Random rnd=new Random();
+            int _min = 1000;
+            int _max = 9999;
+            var ConfirmKod=rnd.Next(_min, _max);
+            // генерация токена для пользователя
+           // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            //var callbackUrl = Url.Action("ConfirmEmail","Account",
+            //    new { userId = user.Id, code = code },
+            //    protocol: HttpContext.Request.Scheme);
+            EmailService emailService = new EmailService();
+            await emailService.SendEmailAsync("hde@iro23.info", "Confirm your account",
+                $"Подтвердите регистрацию, перейдя по ссылке: '{ConfirmKod}'");
 
+            return Json("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+
+
+
+        }
 
 
         //[HttpGet]
@@ -56,13 +76,21 @@ namespace SISPR.Controllers
 
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,pass = HashPass (model.Password) };
+                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password) };
                 Context.Users.Add(user);
                 Context.SaveChanges();
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+
+
+
+
+
+
+
                     // установка куки
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");

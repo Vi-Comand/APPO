@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text"asp-for="I" class="form-control inp-theme" id="ImInput" placeholder="Иван*" required>
+                    <input type="text" asp-for="I" class="form-control inp-theme" id="ImInput" placeholder="Иван*" required>
                     <label for="floatingInput">Имя</label>
                     <div class="valid-feedback">
                         Все хорошо!
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" asp-for="O"class="form-control inp-theme" id="OtInput" placeholder="Иванович">
+                    <input type="text" asp-for="O" class="form-control inp-theme" id="OtInput" placeholder="Иванович">
                     <label for="floatingInput">Отчество</label>
                     <div class="valid-feedback">
                         Все хорошо!
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 @*</div>
-                    <div class="row m-2">*@
+        <div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <input type="email" asp-for="Email" class="form-control inp-theme" id="emailInput" placeholder="name@example.com" required>
                     <label for="floatingInput">Адрес электронной почты</label>
@@ -57,8 +57,24 @@
                         Введите коректный адрес электронной почты
                     </div>
                 </div>
+                <div id="DivButPodver" class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <a style="flex-direction: column; justify-content: center; display: inline-flex; " onclick="CheckEmail()" class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Подтвердить Email</a>
+                </div>
+                <div id="DivKodPodtver"  class="form-floating col-12 col-md-6 col-lg-4 pe-md-3 d-none">
+                    <input type="text" class="form-control inp-theme" id="KodPodtver" placeholder="Введите код">
+                    <label for="floatingInput">Введите код</label>
+                 
+                    <div class="invalid-feedback">
+                        Введите коректный код
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3 d-none">
+                    
+                    <label for="floatingInput">Подтверждено</label>
+                  
+                </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="password" class="form-control inp-theme"asp-for="Password" id="passwordInput" placeholder="********" pattern=".{6,}" required>
+                    <input type="password" class="form-control inp-theme" asp-for="Password" id="passwordInput" placeholder="********" pattern=".{6,}" required>
                     <label for="passwordInput">Пароль</label>
                     <div class="invalid-feedback">
                         Пароль должен состоять не менее чем из 6 символов
@@ -75,99 +91,119 @@
 
                 <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
 
-                <button  class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3" >Далее</button>
+                <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
 
             </div>
 
-            <div class="col-12 col-md-9 row-alt d-none" id="div_second">
-                <h5 class="col-12">Создайте аккаунт ИРО</h5>
-                @*<div class="row m-2">*@
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option selected>Выберите регион</option>
-                        <option value="23">Краснодарский край</option>
-                        <option value="69">Ростовская область</option>
-                        <option value="26">Ставропольский край</option>
-                    </select>
-                    <label for="regionInput">Регион</label>
-                    <div class="invalid-feedback">
-                        Выберите регион
+                <div class="col-12 col-md-9 row-alt d-none" id="div_second">
+                    <h5 class="col-12">Создайте аккаунт ИРО</h5>
+                    @*<div class="row m-2">*@
+                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                        <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                            <option selected>Выберите регион</option>
+                            <option value="23">Краснодарский край</option>
+                            <option value="69">Ростовская область</option>
+                            <option value="26">Ставропольский край</option>
+                        </select>
+                        <label for="regionInput">Регион</label>
+                        <div class="invalid-feedback">
+                            Выберите регион
+                        </div>
                     </div>
-                </div>
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
-                        <option selected>Выберите МО</option>
-                        <option value="23">Краснодар</option>
-                        <option value="69">Сочи</option>
-                        <option value="26">Кущевский район</option>
-                    </select>
-                    <label for="moInput">МО</label>
-                    <div class="invalid-feedback">
-                        Выберите муниципалитет
+                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                        <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
+                            <option selected>Выберите МО</option>
+                            <option value="23">Краснодар</option>
+                            <option value="69">Сочи</option>
+                            <option value="26">Кущевский район</option>
+                        </select>
+                        <label for="moInput">МО</label>
+                        <div class="invalid-feedback">
+                            Выберите муниципалитет
+                        </div>
                     </div>
+
+                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                        <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                        <label for="cityInput">Населенный пункт</label>
+                        <div class="invalid-feedback">
+                            Введите отчество при его наличии
+                        </div>
+                    </div>
+                    @*</div>
+            <div class="row m-2">*@
+                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                        <input type="text" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                        <label for="ooInput">Краткое наименование ОО</label>
+                        <div class="invalid-feedback">
+                            Введите краткое наименование ОО
+                        </div>
+                    </div>
+                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                        <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
+                        <label for="telInput">Телефон</label>
+                        <div class="invalid-feedback">
+                            Пароль должен состоять не менее чем из 6 символов
+                        </div>
+                    </div>
+                    <script>
+                        $('.mask-phone').mask('+7 (999) 999-99-99');
+                    </script>
+                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                        <input type="text" class="form-control inp-theme mask-snils" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
+                        <label for="snilsInput">СНИЛС</label>
+                        <div class="invalid-feedback">
+                            Пароль не совподает
+                        </div>
+                    </div>
+                    <script>
+                        $('.mask-snils').mask('999-999-999 99');
+                    </script>
+
+                    <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
+
+                    <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 " asp-action="Register" asp-controller="Account">Регистрация</button>
+
+
                 </div>
 
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
-                    <label for="cityInput">Населенный пункт</label>
-                    <div class="invalid-feedback">
-                        Введите отчество при его наличии
-                    </div>
-                </div>
-                @*</div>
-                    <div class="row m-2">*@
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
-                    <label for="ooInput">Краткое наименование ОО</label>
-                    <div class="invalid-feedback">
-                        Введите краткое наименование ОО
-                    </div>
-                </div>
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
-                    <label for="telInput">Телефон</label>
-                    <div class="invalid-feedback">
-                        Пароль должен состоять не менее чем из 6 символов
-                    </div>
-                </div>
-                <script>
-                    $('.mask-phone').mask('+7 (999) 999-99-99');
-                </script>
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme mask-snils" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
-                    <label for="snilsInput">СНИЛС</label>
-                    <div class="invalid-feedback">
-                        Пароль не совподает
-                    </div>
-                </div>
-                <script>
-                    $('.mask-snils').mask('999-999-999 99');
-                </script>
-
-                <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
-
-                <button  class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 "asp-action="Register" asp-controller="Account">Регистрация</button>
 
 
+                <div class="col-3 reg">
+                    <div width="200" height="200">
+                        <img width="200" height="200" class="img-card-home" src="~/file/logo.png" />
+                    </div>
+                    <p>Один аккаунт - для всех сервисов Института развития образования Краснодарского края</p>
+                </div>
             </div>
-
-
-
-            <div class="col-3 reg">
-                <div width="200" height="200">
-                    <img width="200" height="200" class="img-card-home" src="~/file/logo.png" />
-                </div>
-                <p>Один аккаунт - для всех сервисов Института развития образования Краснодарского края</p>
-            </div>
-        </div>
     </div>
 </form>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
-     //Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
 
-     var n = 0;
+
+    function CheckEmail() {
+        var Email = document.getElementById("emailInput").value;
+        alert(Email);
+        jQuery.ajax({
+            url: '/Account/ConfirmedEmailAjax/',
+            type: "POST",
+            dataType: "json",
+            data: { Email: Email },
+            success: function (query) {
+
+                alert("dasdadasdasdsdjklasjad;jlsdasopfsdupsdp[fsjkdf;lsdfkl;seirvkx,v/sdif;ofj;asj");
+            }
+        });
+    }
+
+
+
+
+    //Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
+
+    var n = 0;
     (function() {
         'use strict'
 
