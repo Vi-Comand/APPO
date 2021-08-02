@@ -7,8 +7,10 @@
     <title>@ViewData["Title"] - АППО (Автоматизированая платформа персонифицированного обучения Краснодарского края)</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/js/jquery.maskedinput.min.js"></script>
+    <link href="~/css/bootstrap-select.css" rel="stylesheet" />
+
+   
+
     <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body class="theme_bg_grad">
@@ -87,14 +89,23 @@
             &copy; 2021 - АППО (Автоматизированая платформа персонифицированного обучения Краснодарского края) - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="~/js/stars.js"></script>
-    <script src="~/js/jquery.maskedinput.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+        <script src="~/js/jquery.maskedinput.min.js"></script>*@
     @*<script src="https://unpkg.com/vue@next"></script>
         <script src=" https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.5/trianglify.min.js" asp-append-version="true"></script>
         <script src=" https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js" asp-append-version="true"></script>*@
 
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/jquery.maskedinput.min.js"></script>
+    <script src="~/js/bootstrap-select.js"></script>
+    <script src="~/js/defaults-ru_RU.js"></script>
+    <script src="~/js/stars.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
