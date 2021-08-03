@@ -10,7 +10,8 @@ namespace SISPR.Models.DataBase.Basic.Location
         public int oo_id { get; set; }
         public string name { get; set; }
         public string name_short { get; set; }
-        public int oo_type_id { get; set; }
+        public string oo_type { get; set; }
         public int city_id { get; set; }
+        public long inn { get; set; }
     }
 }

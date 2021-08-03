@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text"asp-for="I" class="form-control inp-theme" id="ImInput" placeholder="Иван*" required>
+                    <input type="text" asp-for="I" class="form-control inp-theme" id="ImInput" placeholder="Иван*" required>
                     <label for="floatingInput">Имя</label>
                     <div class="valid-feedback">
                         Все хорошо!
@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" asp-for="O"class="form-control inp-theme" id="OtInput" placeholder="Иванович">
+                    <input type="text" asp-for="O" class="form-control inp-theme" id="OtInput" placeholder="Иванович">
                     <label for="floatingInput">Отчество</label>
                     <div class="valid-feedback">
                         Все хорошо!
@@ -58,7 +58,7 @@
                     </div>
                 </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="password" class="form-control inp-theme"asp-for="Password" id="passwordInput" placeholder="********" pattern=".{6,}" required>
+                    <input type="password" class="form-control inp-theme" asp-for="Password" id="passwordInput" placeholder="********" pattern=".{6,}" required>
                     <label for="passwordInput">Пароль</label>
                     <div class="invalid-feedback">
                         Пароль должен состоять не менее чем из 6 символов
@@ -75,7 +75,7 @@
 
                 <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
 
-                <button  class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3" >Далее</button>
+                <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3">Далее</button>
 
             </div>
 
@@ -83,46 +83,231 @@
                 <h5 class="col-12">Создайте аккаунт ИРО</h5>
                 @*<div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option selected>Выберите регион</option>
-                        <option value="23">Краснодарский край</option>
-                        <option value="69">Ростовская область</option>
-                        <option value="26">Ставропольский край</option>
-                    </select>
+                    <input type="text" class="form-control inp-theme" id="regionInput" onchange="regDa(this.value)" placeholder="Краснодар">
+                    <input type="text" id="regionNoTypeInput">
+                    <input type="text" id="regionIdInput">
                     <label for="regionInput">Регион</label>
                     <div class="invalid-feedback">
-                        Выберите регион
+                        Введите регион
+                    </div>
+                    <div class="invalid-feedback " id="regInvDiv">
+                        Регион не найден. Попробуйте ввести заново
                     </div>
                 </div>
+                <script>
+                    class Address {
+                        constructor() {
+                            this.regIn = document.getElementById("regionInput");
+                            this.regNoTypeIn = document.getElementById("regionNoTypeInput");
+                            this.regIdIn = document.getElementById("regionIdInput");
+                            this.regInvDiv = document.getElementById("regInvDiv");
+                            this.moIn = document.getElementById("moInput");
+                            this.moNoTypeIn = document.getElementById("moNoTypeInput");
+                            this.moIdIn = document.getElementById("moIdInput");
+                            this.moInvDiv = document.getElementById("moInvDiv");
+                            this.cityIn = document.getElementById("cityInput");
+                            this.cityNoTypeIn = document.getElementById("cityNoTypeInput");
+                            this.cityIdIn = document.getElementById("cityIdInput");
+                            this.cityInvDiv = document.getElementById("cityInvDiv");
+                            this.ooIn = document.getElementById("ooInput");
+                            this.ooNoTypeIn = document.getElementById("ooNoTypeInput");
+                            this.ooIdIn = document.getElementById("ooIdInput");
+                        }
+                    }
+
+                    function regDa(adr) {
+                        var adress = new Address();
+                        if (adress.regIn.value == null) {
+                            adress.moIn.setAttribute("disabled", "disabled");
+                        }
+                        else {
+                            jQuery.ajax({
+                                url: '/Account/RegionAjax/',
+                                type: "POST",
+                                dataType: "json",
+                                data: { adr: adr },
+                                success: function (query) {
+                                    if (query.region_id == -30) {
+                                        adress.regIn.value = "";
+                                        adress.regInvDiv.classList.add("d-block");
+                                        adress.moIn.setAttribute("disabled", "disabled");
+                                    }
+                                    else {
+                                        adress.regIn.value = query.name;
+                                        adress.regNoTypeIn.value = query.search_name;
+                                        adress.regIdIn.value = query.fias_code;
+                                        adress.moIn.attributes.removeNamedItem("disabled");
+                                        adress.regInvDiv.classList.remove("d-block");
+                                    }
+                                }
+                            });
+                        }
+
+                    };
+
+                    function moDa(adr) {
+                        var adress = new Address();
+                        if (adress.moIn.value == null) {
+                            adress.cityIn.setAttribute("disabled", "disabled");
+                        }
+                        else {
+                            jQuery.ajax({
+                                url: '/Account/MoAjax/',
+                                type: "POST",
+                                dataType: "json",
+                                data: { adr: adr, reg: adress.regNoTypeIn.value },
+                                success: function (query) {
+                                    adress.moIn.value = query.name;
+                                    adress.moNoTypeIn.value = query.searсh_name;
+                                    adress.moIdIn.value = query.fias_code;
+                                    if (query.region_id == -10) {
+                                        adress.cityIn.value = query.name;
+                                        adress.cityNoTypeIn.value = query.searсh_name;
+                                        adress.cityIdIn.value = query.fias_code;
+                                        adress.cityIn.attributes.removeNamedItem("disabled");
+                                        adress.moInvDiv.classList.remove("d-block");
+                                    }
+                                    else if (query.region_id == -30 || query.region_id == -20) {
+                                        //alert("Муниципальное образование не найдено. Попробуйте ввести заново");
+                                        adress.moIn.value = "";
+                                        adress.moInvDiv.classList.add("d-block");
+                                        adress.cityIn.setAttribute("disabled", "disabled");
+                                    }
+                                    else {
+
+                                        adress.cityIn.attributes.removeNamedItem("disabled");
+                                        adress.moInvDiv.classList.remove("d-block");
+                                    }
+                                }
+                            });
+                        }
+
+                    };
+
+                    function cityDa(adr) {
+                        var adress = new Address();
+                        if (adress.moIn.value == null) {
+                            adress.ooIn.setAttribute("disabled", "disabled");
+                        }
+                        else {
+                            jQuery.ajax({
+                                url: '/Account/CityAjax/',
+                                type: "POST",
+                                dataType: "json",
+                                data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value },
+                                success: function (query) {
+                                    adress.moIn.value = query.name;
+                                    adress.moNoTypeIn.value = query.searсh_name;
+                                    adress.moIdIn.value = query.fias_code;
+                                    if (query.region_id == -10) {
+                                        adress.cityIn.value = query.name;
+                                        adress.cityNoTypeIn.value = query.searсh_name;
+                                        adress.cityIdIn.value = query.fias_code;
+                                        adress.cityIn.attributes.removeNamedItem("disabled");
+                                        adress.moInvDiv.classList.remove("d-block");
+                                    }
+                                    else if (query.region_id == -30 || query.region_id == -20) {
+                                        //alert("Муниципальное образование не найдено. Попробуйте ввести заново");
+                                        adress.moIn.value = "";
+                                        adress.moInvDiv.classList.add("d-block");
+                                        adress.cityIn.setAttribute("disabled", "disabled");
+                                    }
+                                    else {
+
+                                        adress.cityIn.attributes.removeNamedItem("disabled");
+                                        adress.moInvDiv.classList.remove("d-block");
+                                    }
+                                }
+                            });
+                        }
+
+                    };
+
+                    function ooDa(adr) {
+                        var adress = new Address();
+                        //if (adress.moIn.value == null) {
+                        //    adress.cityIn.setAttribute("disabled", "disabled");
+                        //}
+                        //else {
+                        jQuery.ajax({
+                            url: '/Account/OoAjax/',
+                            type: "POST",
+                            dataType: "json",
+                            data: { adr: adr, reg: adress.ooIn.value },
+                            success: function (query) {
+                                adress.ooIn.value = query.name_short;
+                                // adress.moNoTypeIn.value = query.searсh_name;
+                                // adress.moIdIn.value = query.fias_code;
+                                // //if (query.region_id == -10) {
+                                //     adress.cityIn.value = query.name;
+                                //     adress.cityNoTypeIn.value = query.searсh_name;
+                                //     adress.cityIdIn.value = query.fias_code;
+                                //     adress.cityIn.attributes.removeNamedItem("disabled");
+                                //     adress.moInvDiv.classList.remove("d-block");
+                                //// }
+                                //else if (query.region_id == -30 || query.region_id == -20) {
+                                //    //alert("Муниципальное образование не найдено. Попробуйте ввести заново");
+                                //    adress.moIn.value = "";
+                                //    adress.moInvDiv.classList.add("d-block");
+                                //    adress.cityIn.setAttribute("disabled", "disabled");
+                                //}
+                                //else {
+
+                                //    adress.cityIn.attributes.removeNamedItem("disabled");
+                                //    adress.moInvDiv.classList.remove("d-block");
+                                //}
+                            }
+                        });
+                        // }
+
+                    };
+
+
+
+
+
+
+
+
+                </script>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
-                        <option selected>Выберите МО</option>
-                        <option value="23">Краснодар</option>
-                        <option value="69">Сочи</option>
-                        <option value="26">Кущевский район</option>
-                    </select>
+                    <input type="text" class="form-control inp-theme " id="moInput" onchange="moDa(this.value)" placeholder="Краснодар" disabled>
+                    <input type="text" id="moNoTypeInput">
+                    <input type="text" id="moIdInput">
                     <label for="moInput">МО</label>
                     <div class="invalid-feedback">
-                        Выберите муниципалитет
+                        Введите муниципалитет
+                    </div>
+                    <div class="invalid-feedback " id="moInvDiv">
+                        Муниципальное образование не найдено. Попробуйте ввести заново
                     </div>
                 </div>
 
+
+
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар" disabled>
+                    <input type="text" id="cityNoTypeInput">
+                    <input type="text" id="cityIdInput">
                     <label for="cityInput">Населенный пункт</label>
                     <div class="invalid-feedback">
-                        Введите отчество при его наличии
+                        Введите населенный пункт
+                    </div>
+                    <div class="invalid-feedback " id="cityInvDiv">
+                        Населенный пункт не найден. Попробуйте ввести заново
                     </div>
                 </div>
                 @*</div>
                     <div class="row m-2">*@
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
-                    <label for="ooInput">Краткое наименование ОО</label>
-                    <div class="invalid-feedback">
-                        Введите краткое наименование ОО
-                    </div>
+            <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                <input type="text" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1" onchange="ooDa(this.value)">
+                <input type="text" id="ooNoTypeInput">
+                <input type="text" id="ooIdInput">
+                <label for="ooInput">Краткое наименование ОО</label>
+                <div class="invalid-feedback">
+                    Введите краткое наименование ОО
                 </div>
+            </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
                     <label for="telInput">Телефон</label>
@@ -146,7 +331,7 @@
 
                 <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
 
-                <button  class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 "asp-action="Register" asp-controller="Account">Регистрация</button>
+                <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 " asp-action="Register" asp-controller="Account">Регистрация</button>
 
 
             </div>
@@ -165,10 +350,10 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
-     //Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
+    //Пример стартового JavaScript для отключения отправки форм при наличии недопустимых полей
 
-     var n = 0;
-    (function() {
+    var n = 0;
+    (function () {
         'use strict'
 
         // Получите все формы, к которым мы хотим применить пользовательские стили проверки Bootstrap
@@ -177,9 +362,9 @@
         // Зацикливайтесь на них и предотвращайте отправку
 
         Array.prototype.slice.call(forms)
-            .forEach(function(form) {
+            .forEach(function (form) {
                 form.addEventListener('submit',
-                    function(event) {
+                    function (event) {
                         if (!form.checkValidity()) {
                             event.preventDefault();
                             event.stopPropagation();
@@ -206,7 +391,7 @@
 
     function next() {
         var DivFirst = document.getElementById('div_first');
-        var DivSecond = document.getElementById('div_second'); 
+        var DivSecond = document.getElementById('div_second');
         var regInput = document.getElementById('regInput');
         DivFirst.classList.add("d-none");
         DivSecond.classList.remove("d-none");

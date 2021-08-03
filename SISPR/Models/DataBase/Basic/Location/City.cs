@@ -11,5 +11,7 @@ namespace SISPR.Models.DataBase.Basic.Location
         public int city_id { get; set; }
         public string name { get; set; }
         public int mo_id { get; set; }
+        public double fias_code { get; set; }
+        public string search_name { get; set; }
     }
 }

@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Dadata;
+using Dadata.Model;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SISPR.Models.DataBase;
+using SISPR.Models.DataBase.Basic.Location;
 using SISPR.Models.DataBase.Basic.User;
 using SISPR.Models.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using SISPR.Models.DataBase;
 
 namespace SISPR.Controllers
 {
@@ -24,10 +25,7 @@ namespace SISPR.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             Context = context;
-
         }
-
-
 
         public IActionResult Login()
         {
@@ -39,10 +37,6 @@ namespace SISPR.Controllers
             return View();
         }
 
-
-
-
-
         //[HttpGet]
         //public IActionResult Register()
         //{
@@ -51,12 +45,9 @@ namespace SISPR.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-          
-
-
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,pass = HashPass (model.Password) };
+                User user = new User { Email = model.Email, f = model.F, i = model.I, o = model.O, pass = HashPass(model.Password) };
                 Context.Users.Add(user);
                 Context.SaveChanges();
                 // добавляем пользователя
@@ -80,9 +71,6 @@ namespace SISPR.Controllers
 
         private string HashPass(string password)
         {
-
-            
-
             //generate a 128 - bit salt using a secure PRNG
             string a = "Проект_Яна";
 
@@ -97,7 +85,6 @@ namespace SISPR.Controllers
                 numBytesRequested: 256 / 8));
             return hashed;
         }
-
 
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
@@ -142,5 +129,121 @@ namespace SISPR.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public string token = "849df9cd46f8aa00925f2033914543026fe5af1f";
+
+        async public Task<IActionResult> RegionAjax(string adr)
+        {
+            var api = new SuggestClientAsync(token);
+            SuggestAddressRequest a = new SuggestAddressRequest(adr, 1)
+            {
+                from_bound = new AddressBound("region"),
+                to_bound = new AddressBound("region"),
+                /* locations = new[] { new Address() { area = "Кущевский" } }*/
+            };
+            var result = await api.SuggestAddress(a);
+            for (int i = 0; i < 10 && result.suggestions.Count == 0; i++)
+                result = await api.SuggestAddress(a);
+            Region region = new Region();
+            try
+            {
+                region.name = result.suggestions[0].data.region_with_type;
+                region.search_name = result.suggestions[0].data.region;
+                region.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
+            }
+            catch
+            {
+                region.region_id = -30;
+            }
+            return Json(region);
+        }
+
+        async public Task<IActionResult> MoAjax(string adr, string reg)
+        {
+            var api = new SuggestClientAsync(token);
+            SuggestAddressRequest a = new SuggestAddressRequest(adr, 1)
+            {
+                from_bound = new AddressBound("area"),
+                to_bound = new AddressBound("city"),
+                locations = new[] { new Address() { region = reg } }
+            };
+            var result = await api.SuggestAddress(a);
+            for (int i = 0; i < 10 && result.suggestions.Count == 0; i++)
+                result = await api.SuggestAddress(a);
+            MO mo = new MO();
+            try
+            {
+                mo.name = result.suggestions[0].data.area_with_type ?? result.suggestions[0].data.city_with_type;
+                mo.searсh_name = result.suggestions[0].data.area ?? result.suggestions[0].data.city;
+                mo.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
+                if (result.suggestions[0].data.area == null)
+                    mo.region_id = -10;
+                if (result.suggestions[0].data.city_with_type == null && result.suggestions[0].data.area_with_type == null)
+                    mo.region_id = -20;
+            }
+            catch
+            {
+                mo.region_id = -30;
+            }
+            return Json(mo);
+        }
+
+        async public Task<IActionResult> CityAjax(string adr, string reg, string mo)
+        {
+            var api = new SuggestClientAsync(token);
+            SuggestAddressRequest a = new SuggestAddressRequest(adr, 1)
+            {
+                from_bound = new AddressBound("city"),
+                to_bound = new AddressBound("settlement"),
+                locations = new[] { new Address() { region = reg, area = mo } }
+            };
+            var result = await api.SuggestAddress(a);
+            for (int i = 0; i < 10 && result.suggestions.Count == 0; i++)
+                result = await api.SuggestAddress(a);
+            City city = new City();
+            try
+            {
+                city.name = result.suggestions[0].data.city_district_with_type ?? result.suggestions[0].data.settlement_with_type;
+                city.search_name = result.suggestions[0].data.city ?? result.suggestions[0].data.settlement;
+                city.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
+                if (result.suggestions[0].data.area == null)
+                    city.mo_id = -10;
+                if (result.suggestions[0].data.city_with_type == null && result.suggestions[0].data.area_with_type == null)
+                    city.mo_id = -20;
+            }
+            catch
+            {
+                city.mo_id = -30;
+            }
+            return Json(mo);
+        }
+
+
+
+
+        async public Task<IActionResult> OoAjax(string adr)
+        {
+            var api = new SuggestClientAsync(token);
+            SuggestPartyRequest a = new SuggestPartyRequest(adr, 1)
+            {
+
+                locations = new[] { new Address() { region = "Краснодарский", area = "Кущевский" } }
+            };
+            var result = await api.SuggestParty(adr + " Сочи" + " сочи");
+            for (int i = 0; i < 10 && result.suggestions.Count == 0; i++)
+                result = await api.SuggestParty(adr + " Сочи" + " Сочи");
+            OO oo = new OO();
+            try
+            {
+                oo.name = result.suggestions[0].data.name.full;
+                oo.name_short = result.suggestions[0].data.name.@short;
+                oo.inn = Convert.ToInt64(result.suggestions[0].data.inn);
+                oo.oo_type = result.suggestions[0].data.type.ToString();
+            }
+            catch
+            {
+                oo.oo_id = -30;
+            }
+            return Json(oo);
+        }
     }
 }
