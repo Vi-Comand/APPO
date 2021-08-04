@@ -48,7 +48,7 @@
                 @*</div>
         <div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="email" asp-for="Email" class="form-control inp-theme" id="emailInput" placeholder="name@example.com" required>
+                    <input type="email" asp-for="Email" class="form-control inp-theme"onkeyup="ChangeEmail()" id="emailInput" placeholder="name@example.com" required>
                     <label for="floatingInput">Адрес электронной почты</label>
                     <div class="valid-feedback">
                         Все хорошо!
@@ -57,22 +57,22 @@
                         Введите коректный адрес электронной почты
                     </div>
                 </div>
-                <div id="DivButPodver" class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <a style="flex-direction: column; justify-content: center; display: inline-flex; " onclick="CheckEmail()" class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Подтвердить Email</a>
+                <div id="DivButPodtver" class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <a style="flex-direction: column; justify-content: center; display: inline-flex; "onclick="CheckEmail()" class="btn btn-sm btn-primary col-12 me-auto ">Подтвердить Email</a>
                 </div>
                 <div id="DivKodPodtver"  class="form-floating col-12 col-md-6 col-lg-4 pe-md-3 d-none">
-                    <input type="text" class="form-control inp-theme" id="KodPodtver" placeholder="Введите код">
+                    <input type="text" class="form-control inp-theme " id="KodPodtver"  onkeyup="CheckKod(this.value)"placeholder="Введите код">
                     <label for="floatingInput">Введите код</label>
                  
-                    <div class="invalid-feedback">
+                    <div id="DivKodInvalid"class="invalid-feedback">
                         Введите коректный код
                     </div>
+
                 </div>
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3 d-none">
-                    
-                    <label for="floatingInput">Подтверждено</label>
-                  
-                </div>
+                <div id="DivPodtver"class="form-floating col-12 col-md-6 col-lg-4 pe-md-3 d-none">
+                        
+                    <h4> <label class="a">Подтверждено!</label> </h4>
+</div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <input type="password" class="form-control inp-theme" asp-for="Password" id="passwordInput" placeholder="********" pattern=".{6,}" required>
                     <label for="passwordInput">Пароль</label>
@@ -181,10 +181,56 @@
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
+    var HashKod;
+    function ChangeEmail() {
+
+        var divKodPodtver = document.getElementById("DivKodPodtver");
+        divKodPodtver.classList.add("d-none");
+        HashKod = null;
+        var divPodtver = document.getElementById("DivPodtver");
+        divPodtver.classList.add("d-none");
+        divPodtver.value = null;
+        var DivButPodtver = document.getElementById("DivButPodtver");
+        DivButPodtver.classList.remove("d-none");
+    }
+function CheckKod(kod) {
+    if (kod.length == 4) {
+        jQuery.ajax({
+            url: '/Account/CheckKod/',
+            type: "POST",
+            dataType: "json",
+            data: { kod: kod, HashKod: HashKod },
+            success: function (succeed) {
+               
+                if (succeed == "true") {
+                   
+                    var divKodPodtver = document.getElementById("DivKodPodtver");
+                    divKodPodtver.classList.add("d-none");
+                    var divPodtver = document.getElementById("DivPodtver");
+                    divPodtver.classList.remove("d-none");
+                    var divKodInvalid = document.getElementById("DivKodInvalid");
+                    divKodInvalid.classList.remove("d-block");
+                }
+                else {
+                  
+                    var divKodInvalid = document.getElementById("DivKodInvalid");
+                divKodInvalid.classList.add("d-block");
+            
+                }
+            }
+        });
 
 
+    }
+
+    }
     function CheckEmail() {
         var Email = document.getElementById("emailInput").value;
+        var divKodPodtver = document.getElementById("DivKodPodtver");
+        divKodPodtver.classList.remove("d-none");
+       
+        var DivButPodtver = document.getElementById("DivButPodtver");
+        DivButPodtver.classList.add("d-none");
         alert(Email);
         jQuery.ajax({
             url: '/Account/ConfirmedEmailAjax/',
@@ -192,8 +238,9 @@
             dataType: "json",
             data: { Email: Email },
             success: function (query) {
-
-                alert("dasdadasdasdsdjklasjad;jlsdasopfsdupsdp[fsjkdf;lsdfkl;seirvkx,v/sdif;ofj;asj");
+                HashKod = query.hash;
+                alert(HashKod);
+                alert(query.messege);
             }
         });
     }

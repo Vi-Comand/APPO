@@ -43,26 +43,32 @@ namespace SISPR.Controllers
 
         public async Task<IActionResult> ConfirmedEmailAjax(string Email)
         {
+            var checkKod = new CheckKod();
+            
             Random rnd=new Random();
             int _min = 1000;
             int _max = 9999;
             var ConfirmKod=rnd.Next(_min, _max);
-            // генерация токена для пользователя
-           // var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            //var callbackUrl = Url.Action("ConfirmEmail","Account",
-            //    new { userId = user.Id, code = code },
-            //    protocol: HttpContext.Request.Scheme);
+           
             EmailService emailService = new EmailService();
-            await emailService.SendEmailAsync("hde@iro23.info", "Confirm your account",
-                $"Подтвердите регистрацию, перейдя по ссылке: '{ConfirmKod}'");
-
-            return Json("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+            await emailService.SendEmailAsync(Email, "Подтверждение Email", ConfirmKod.ToString());
+            checkKod.hash = HashPass(ConfirmKod.ToString());
+            checkKod.messege = $"На почту {Email} отправлено код для подтверждения!";
+            return Json(checkKod);
 
 
 
         }
+        [HttpPost]
+        public async Task<IActionResult> CheckKod(int kod, string HashKod)
+        {
+            if(HashPass(kod.ToString()) == HashKod)
+                return Json("true");
 
 
+            return Json("false");
+        }
+        
         //[HttpGet]
         //public IActionResult Register()
         //{

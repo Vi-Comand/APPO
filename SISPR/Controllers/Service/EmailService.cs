@@ -8,19 +8,13 @@ namespace SISPR.Controllers.Service
 {
     public class EmailService
     {
-        public async Task SendEmailAsync(string email, string subject1, string message1)
+        public async Task SendEmailAsync(string email, string subject, string kod)
         {
-         
+            var fromAddress = new MailAddress("hde@iro23.info", "АППО");
+            var toAddress = new MailAddress(email, "To Name");
+            string fromPassword = "DAkh1596814";
 
-
-
-
-
-            var fromAddress = new MailAddress("hde@iro23.info", "From Name");
-            var toAddress = new MailAddress("hde@iro23.info", "To Name");
-            const string fromPassword = "DAkh1596814";
-            const string subject = "Subject";
-            const string body = "Body";
+           
 
             var smtp = new SmtpClient
             {
@@ -31,14 +25,17 @@ namespace SISPR.Controllers.Service
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
-            using (var message = new MailMessage(fromAddress, toAddress)
-            {
-                Subject = subject,
-                Body = body
-            })
-            {
+            var message = new MailMessage(fromAddress, toAddress);
+
+
+            message.Subject = subject;
+            message.Body = $"Вы регистрируетесь на сайте АППО. Для продолжения регистрации ведите код:<b style='color: #21A19A;'>{kod}</b>";
+            message.IsBodyHtml = true;
+
+
+
                 smtp.Send(message);
-            }
+            
 
 
 
