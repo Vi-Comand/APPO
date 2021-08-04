@@ -96,29 +96,40 @@
                 </div>
                 <script>
                     class Address {
+                        
                         constructor() {
-                            this.regIn = document.getElementById("regionInput");
-                            this.regNoTypeIn = document.getElementById("regionNoTypeInput");
-                            this.regIdIn = document.getElementById("regionIdInput");
-                            this.regInvDiv = document.getElementById("regInvDiv");
-                            this.moIn = document.getElementById("moInput");
-                            this.moNoTypeIn = document.getElementById("moNoTypeInput");
-                            this.moIdIn = document.getElementById("moIdInput");
-                            this.moInvDiv = document.getElementById("moInvDiv");
-                            this.cityIn = document.getElementById("cityInput");
-                            this.cityNoTypeIn = document.getElementById("cityNoTypeInput");
-                            this.cityIdIn = document.getElementById("cityIdInput");
-                            this.cityInvDiv = document.getElementById("cityInvDiv");
-                            this.ooIn = document.getElementById("ooInput");
-                            this.ooNoTypeIn = document.getElementById("ooNoTypeInput");
-                            this.ooIdIn = document.getElementById("ooIdInput");
+                           
+                          
+                            this.regIn = new Object( document.getElementById("regionInput"));
+                            this.regNoTypeIn = new Object( document.getElementById("regionNoTypeInput"));
+                            this.regIdIn = new Object( document.getElementById("regionIdInput"));
+                            this.regInvDiv = new Object( document.getElementById("regInvDiv"));
+                            this.moIn = new Object( document.getElementById("moInput")) ;
+                            this.moNoTypeIn = new Object( document.getElementById("moNoTypeInput"));
+                            this.moIdIn = new Object( document.getElementById("moIdInput"));
+                            this.moInvDiv = new Object( document.getElementById("moInvDiv"));
+                            this.cityIn = new Object( document.getElementById("cityInput"));
+                            this.cityNoTypeIn = new Object( document.getElementById("cityNoTypeInput"));
+                            this.cityIdIn = new Object( document.getElementById("cityIdInput"));
+                            this.cityInvDiv = new Object( document.getElementById("cityInvDiv"));
+                            this.ooShortIn = new Object( document.getElementById("ooShortInput"));
+                            this.ooInnIn = new Object( document.getElementById("ooInnInput"));
+                            this.ooNameIn = new Object( document.getElementById("ooNameInput"));
+                            this.ooInvDiv = new Object( document.getElementById("ooInvDiv"));
                         }
                     }
 
                     function regDa(adr) {
                         var adress = new Address();
-                        if (adress.regIn.value == null) {
-                            adress.moIn.setAttribute("disabled", "disabled");
+                        if (adress.regIn.value == "") {
+                            
+                           
+                            adress.cityIn.value=null;
+                            adress.ooShortIn.value = null;
+                            adress.moIn.value=null;
+                            adress.cityIn.disabled=true;
+                            adress.ooShortIn.disabled = true;
+                            adress.moIn.disabled = true;
                         }
                         else {
                             jQuery.ajax({
@@ -136,7 +147,7 @@
                                         adress.regIn.value = query.name;
                                         adress.regNoTypeIn.value = query.search_name;
                                         adress.regIdIn.value = query.fias_code;
-                                        adress.moIn.attributes.removeNamedItem("disabled");
+                                        adress.moIn.disabled = false;
                                         adress.regInvDiv.classList.remove("d-block");
                                     }
                                 }
@@ -147,8 +158,12 @@
 
                     function moDa(adr) {
                         var adress = new Address();
-                        if (adress.moIn.value == null) {
-                            adress.cityIn.setAttribute("disabled", "disabled");
+                        if (adress.moIn.value == "") {
+                           
+                            adress.cityIn.value = null;
+                            adress.ooShortIn.value = null;
+                            adress.cityIn.disabled = true;
+                            adress.ooShortIn.disabled = true;
                         }
                         else {
                             jQuery.ajax({
@@ -164,18 +179,18 @@
                                         adress.cityIn.value = query.name;
                                         adress.cityNoTypeIn.value = query.searсh_name;
                                         adress.cityIdIn.value = query.fias_code;
-                                        adress.cityIn.attributes.removeNamedItem("disabled");
+                                        adress.cityIn.setAttribute("disabled", "false");
                                         adress.moInvDiv.classList.remove("d-block");
                                     }
                                     else if (query.region_id == -30 || query.region_id == -20) {
-                                        //alert("Муниципальное образование не найдено. Попробуйте ввести заново");
                                         adress.moIn.value = "";
                                         adress.moInvDiv.classList.add("d-block");
-                                        adress.cityIn.setAttribute("disabled", "disabled");
+                                        adress.cityIn.disabled = true;
+                                        adress.ooShortIn.disabled = true;
                                     }
                                     else {
 
-                                        adress.cityIn.attributes.removeNamedItem("disabled");
+                                        adress.cityIn.disabled = false;
                                         adress.moInvDiv.classList.remove("d-block");
                                     }
                                 }
@@ -186,8 +201,10 @@
 
                     function cityDa(adr) {
                         var adress = new Address();
-                        if (adress.moIn.value == null) {
-                            adress.ooIn.setAttribute("disabled", "disabled");
+                       
+                        if (adress.cityIn.value == "") {
+                            adress.ooShortIn.value = null;
+                            adress.ooShortIn.setAttribute("disabled", "disabled");
                         }
                         else {
                             jQuery.ajax({
@@ -196,26 +213,18 @@
                                 dataType: "json",
                                 data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value },
                                 success: function (query) {
-                                    adress.moIn.value = query.name;
-                                    adress.moNoTypeIn.value = query.searсh_name;
-                                    adress.moIdIn.value = query.fias_code;
-                                    if (query.region_id == -10) {
-                                        adress.cityIn.value = query.name;
-                                        adress.cityNoTypeIn.value = query.searсh_name;
-                                        adress.cityIdIn.value = query.fias_code;
-                                        adress.cityIn.attributes.removeNamedItem("disabled");
-                                        adress.moInvDiv.classList.remove("d-block");
-                                    }
-                                    else if (query.region_id == -30 || query.region_id == -20) {
-                                        //alert("Муниципальное образование не найдено. Попробуйте ввести заново");
-                                        adress.moIn.value = "";
-                                        adress.moInvDiv.classList.add("d-block");
-                                        adress.cityIn.setAttribute("disabled", "disabled");
+
+                                    if (query.mo_id == -30 || query.mo_id == -20) {
+                                        adress.cityIn.value = "";
+                                        adress.cityInvDiv.classList.add("d-block");
+                                        adress.ooShortIn.setAttribute("disabled", "disabled");
                                     }
                                     else {
-
-                                        adress.cityIn.attributes.removeNamedItem("disabled");
-                                        adress.moInvDiv.classList.remove("d-block");
+                                        adress.cityIn.value = query.name;
+                                        adress.cityNoTypeIn.value = query.search_name;
+                                        adress.cityIdIn.value = query.fias_code;
+                                        adress.ooShortIn.disabled = false;
+                                        adress.cityInvDiv.classList.remove("d-block");
                                     }
                                 }
                             });
@@ -225,41 +234,24 @@
 
                     function ooDa(adr) {
                         var adress = new Address();
-                        //if (adress.moIn.value == null) {
-                        //    adress.cityIn.setAttribute("disabled", "disabled");
-                        //}
-                        //else {
                         jQuery.ajax({
                             url: '/Account/OoAjax/',
                             type: "POST",
                             dataType: "json",
-                            data: { adr: adr, reg: adress.ooIn.value },
+                            data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value, city: adress.cityNoTypeIn.value },
                             success: function (query) {
-                                adress.ooIn.value = query.name_short;
-                                // adress.moNoTypeIn.value = query.searсh_name;
-                                // adress.moIdIn.value = query.fias_code;
-                                // //if (query.region_id == -10) {
-                                //     adress.cityIn.value = query.name;
-                                //     adress.cityNoTypeIn.value = query.searсh_name;
-                                //     adress.cityIdIn.value = query.fias_code;
-                                //     adress.cityIn.attributes.removeNamedItem("disabled");
-                                //     adress.moInvDiv.classList.remove("d-block");
-                                //// }
-                                //else if (query.region_id == -30 || query.region_id == -20) {
-                                //    //alert("Муниципальное образование не найдено. Попробуйте ввести заново");
-                                //    adress.moIn.value = "";
-                                //    adress.moInvDiv.classList.add("d-block");
-                                //    adress.cityIn.setAttribute("disabled", "disabled");
-                                //}
-                                //else {
-
-                                //    adress.cityIn.attributes.removeNamedItem("disabled");
-                                //    adress.moInvDiv.classList.remove("d-block");
-                                //}
+                                if (query.oo_id == -30 || query.oo_id == -20) {
+                                    adress.ooShortIn.value = "";
+                                    adress.ooInvDiv.classList.add("d-block");
+                                }
+                                else {
+                                    adress.ooShortIn.value = query.name_short;
+                                    adress.ooNameIn.value = query.name;
+                                    adress.ooInnIn.value = query.inn;
+                                    adress.ooInvDiv.classList.remove("d-block");
+                                }
                             }
                         });
-                        // }
-
                     };
 
 
@@ -286,7 +278,7 @@
 
 
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар" disabled>
+                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
                     <input type="text" id="cityNoTypeInput">
                     <input type="text" id="cityIdInput">
                     <label for="cityInput">Населенный пункт</label>
@@ -299,15 +291,18 @@
                 </div>
                 @*</div>
                     <div class="row m-2">*@
-            <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                <input type="text" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1" onchange="ooDa(this.value)">
-                <input type="text" id="ooNoTypeInput">
-                <input type="text" id="ooIdInput">
-                <label for="ooInput">Краткое наименование ОО</label>
-                <div class="invalid-feedback">
-                    Введите краткое наименование ОО
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled>
+                    <input type="text" id="ooInnInput">
+                    <input type="text" id="ooNameInput">
+                    <label for="ooInput">Краткое наименование ОО</label>
+                    <div class="invalid-feedback">
+                        Введите краткое наименование ОО
+                    </div>
+                    <div class="invalid-feedback " id="ooInvDiv">
+                        Образовательная организация не найдена. Попробуйте ввести заново
+                    </div>
                 </div>
-            </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
                     <label for="telInput">Телефон</label>

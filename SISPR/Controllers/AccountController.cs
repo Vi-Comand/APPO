@@ -163,12 +163,24 @@ namespace SISPR.Controllers
             SuggestAddressRequest a = new SuggestAddressRequest(adr, 1)
             {
                 from_bound = new AddressBound("area"),
-                to_bound = new AddressBound("city"),
+                to_bound = new AddressBound("area"),
                 locations = new[] { new Address() { region = reg } }
             };
             var result = await api.SuggestAddress(a);
-            for (int i = 0; i < 10 && result.suggestions.Count == 0; i++)
+            for (int i = 0; i < 5 && result.suggestions.Count == 0; i++)
                 result = await api.SuggestAddress(a);
+            if (result.suggestions.Count == 0)
+            {
+                a = new SuggestAddressRequest(adr, 1)
+                {
+                    from_bound = new AddressBound("area"),
+                    to_bound = new AddressBound("city"),
+                    locations = new[] { new Address() { region = reg } }
+                };
+                result = await api.SuggestAddress(a);
+                for (int i = 0; i < 5 && result.suggestions.Count == 0; i++)
+                    result = await api.SuggestAddress(a);
+            }
             MO mo = new MO();
             try
             {
@@ -202,7 +214,7 @@ namespace SISPR.Controllers
             City city = new City();
             try
             {
-                city.name = result.suggestions[0].data.city_district_with_type ?? result.suggestions[0].data.settlement_with_type;
+                city.name = result.suggestions[0].data.city_with_type ?? result.suggestions[0].data.settlement_with_type;
                 city.search_name = result.suggestions[0].data.city ?? result.suggestions[0].data.settlement;
                 city.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
                 if (result.suggestions[0].data.area == null)
@@ -214,30 +226,29 @@ namespace SISPR.Controllers
             {
                 city.mo_id = -30;
             }
-            return Json(mo);
+            return Json(city);
         }
 
 
 
 
-        async public Task<IActionResult> OoAjax(string adr)
+        async public Task<IActionResult> OoAjax(string adr, string reg, string mo, string city)
         {
             var api = new SuggestClientAsync(token);
-            SuggestPartyRequest a = new SuggestPartyRequest(adr, 1)
-            {
+            /* SuggestPartyRequest a = new SuggestPartyRequest(adr, 1)
+             {
 
-                locations = new[] { new Address() { region = "Краснодарский", area = "Кущевский" } }
-            };
-            var result = await api.SuggestParty(adr + " Сочи" + " сочи");
+                 locations = new[] { new Address() { region = "Краснодарский", area = "Кущевский" } }
+             };*/
+            var result = await api.SuggestParty(adr + " " + reg + " " + mo + " " + city);
             for (int i = 0; i < 10 && result.suggestions.Count == 0; i++)
-                result = await api.SuggestParty(adr + " Сочи" + " Сочи");
+                result = await api.SuggestParty(adr + " " + reg + " " + mo + " " + city);
             OO oo = new OO();
             try
             {
                 oo.name = result.suggestions[0].data.name.full;
                 oo.name_short = result.suggestions[0].data.name.@short;
                 oo.inn = Convert.ToInt64(result.suggestions[0].data.inn);
-                oo.oo_type = result.suggestions[0].data.type.ToString();
             }
             catch
             {
