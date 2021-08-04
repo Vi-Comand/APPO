@@ -61,7 +61,7 @@ const Demo = {
 Vue.createApp(Demo).mount('.demo')
 */
 
-
+/*----------------------------------------------------дроп файл---------------------------------------------*/
 var $fileInput = $('.file-input');
 var $droparea = $('.file-drop-area');
 
@@ -89,3 +89,5 @@ $fileInput.on('change', function () {
         $textContainer.text(filesCount + ' files selected');
     }
 });
+
+

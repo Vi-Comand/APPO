@@ -21,6 +21,22 @@
     font-size: 20px;
 }
 
+/*----------------------------------------анимация полосочки-----------------------------------------------------*/
+#stars {
+    width: 100%;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+
+/*----------------------------------------анимация полосочки-----------------------------------------------------*/
+
+
+
+
 @media (max-width: 768px) {
     .reg {
         display: none;
@@ -57,7 +73,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .bg-1 {
-    background-image: url("/file/f5.png");
+    background-image: url("/file/f1.jpg");
 }
 
 .bg-nav {
