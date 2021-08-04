@@ -10,6 +10,9 @@ using SISPR.Models.ViewModels;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using SISPR.Controllers.Service;
+using SISPR.Models.DataBase;
 
 namespace SISPR.Controllers
 {
@@ -37,6 +40,35 @@ namespace SISPR.Controllers
             return View();
         }
 
+
+        public async Task<IActionResult> ConfirmedEmailAjax(string Email)
+        {
+            var checkKod = new CheckKod();
+            
+            Random rnd=new Random();
+            int _min = 1000;
+            int _max = 9999;
+            var ConfirmKod=rnd.Next(_min, _max);
+           
+            EmailService emailService = new EmailService();
+            await emailService.SendEmailAsync(Email, "Подтверждение Email", ConfirmKod.ToString());
+            checkKod.hash = HashPass(ConfirmKod.ToString());
+            checkKod.messege = $"На почту {Email} отправлено код для подтверждения!";
+            return Json(checkKod);
+
+
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> CheckKod(int kod, string HashKod)
+        {
+            if(HashPass(kod.ToString()) == HashKod)
+                return Json("true");
+
+
+            return Json("false");
+        }
+        
         //[HttpGet]
         //public IActionResult Register()
         //{
@@ -47,13 +79,21 @@ namespace SISPR.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, f = model.F, i = model.I, o = model.O, pass = HashPass(model.Password) };
+                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password) };
                 Context.Users.Add(user);
                 Context.SaveChanges();
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+
+
+
+
+
+
+
+
                     // установка куки
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
