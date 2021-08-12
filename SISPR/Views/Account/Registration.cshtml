@@ -103,9 +103,9 @@
                 <h5 class="col-12">Создайте аккаунт ИРО</h5>
                 @*<div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="regionInput" onchange="regDa(this.value)" placeholder="Краснодар">
-                    <input type="hidden" id="regionNoTypeInput">
-                    <input type="hidden" id="regionIdInput">
+                    <input type="text" class="form-control inp-theme" id="regionInput" asp-for="Region.name"onchange="regDa(this.value)" placeholder="Краснодар">
+                    <input type="hidden"asp-for="Region.search_name" id="regionNoTypeInput">
+                    <input type="hidden"asp-for="Region.fias_code" id="regionIdInput">
                     <label for="regionInput">Регион</label>
                     <div class="invalid-feedback">
                         Введите регион
@@ -283,9 +283,9 @@
 
                 </script>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme " id="moInput" onchange="moDa(this.value)" placeholder="Краснодар" disabled>
-                    <input type="hidden" id="moNoTypeInput">
-                    <input type="hidden" id="moIdInput">
+                    <input type="text" class="form-control inp-theme " id="moInput" onchange="moDa(this.value)" asp-for="MO.name" placeholder="Краснодар" disabled>
+                    <input type="text" asp-for="MO.searсh_name" id="moNoTypeInput">
+                    <input type="text" asp-for="MO.fias_code"id="moIdInput">
                     <label for="moInput">МО</label>
                     <div class="invalid-feedback">
                         Введите муниципалитет
@@ -298,9 +298,9 @@
 
 
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
-                    <input type="hidden" id="cityNoTypeInput">
-                    <input type="hidden" id="cityIdInput">
+                    <input type="text" class="form-control inp-theme" asp-for="City.name"id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
+                    <input type="hidden"asp-for="City.search_name" id="cityNoTypeInput">
+                    <input type="hidden" asp-for="City.fias_code" id="cityIdInput">
                     <label for="cityInput">Населенный пункт</label>
                     <div class="invalid-feedback">
                         Введите населенный пункт
@@ -312,9 +312,9 @@
                 @*</div>
                     <div class="row m-2">*@
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled>
-                    <input type="hidden" id="ooInnInput">
-                    <input type="hidden" id="ooNameInput">
+                    <input type="text" class="form-control inp-theme" asp-for="OO.name" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled>
+                    <input type="text"asp-for="OO.inn"id="ooInnInput">
+                    <input type="hidden" asp-for="OO.name_short" id="ooNameInput">
                     <label for="ooInput">Краткое наименование ОО</label>
                     <div class="invalid-feedback">
                         Введите краткое наименование ОО
@@ -324,7 +324,7 @@
                     </div>
                 </div>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme mask-phone" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
+                    <input type="text" class="form-control inp-theme mask-phone" asp-for="PhoneNumber" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
                     <label for="telInput">Телефон</label>
                     <div class="invalid-feedback">
                         Пароль должен состоять не менее чем из 6 символов
@@ -334,7 +334,7 @@
                     $('.mask-phone').mask('+7 (999) 999-99-99');
                 </script>
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="text" class="form-control inp-theme mask-snils" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
+                    <input type="text" class="form-control inp-theme mask-snils"  asp-for="SNILS" id ="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
                     <label for="snilsInput">СНИЛС</label>
                     <div class="invalid-feedback">
                         Пароль не совподает
@@ -450,7 +450,7 @@
                         if (!form.checkValidity()) {
                             event.preventDefault();
                             event.stopPropagation();
-                            alert(1);
+                         
                             form.classList.add('was-validated');
                         } else if (n == 0) {
 
@@ -459,6 +459,7 @@
                             form.classList.remove('was-validated');
                             event.preventDefault();
                             event.stopPropagation();
+                           
                         } else {
                             form.classList.remove('was-validated');
                         }
