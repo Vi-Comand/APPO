@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
+<h2>Список ролей</h2>
+<table class="table">
+    @foreach (var role in Model)
+    {
+        <tr>
+            <td>@role.Name</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Удалить
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+<div class="col-sm-3">
+    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Добавить роль</a>
+</div>
+
+<a asp-action="UserList">Список пользователей</a>
+
+
+
+<!-- Modal загрузка фото -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+           
+            <div class="modal-header body">
+                <h5 class="modal-title" id="exampleModalLabel">Загрузите фотографию</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body body">
+ 
+                <div asp-validation-summary="All" class="text-danger"></div>
+ 
+                   
+                <div class="form-group">
+                    <label for="name">Новая роль</label>
+                    <input name="name" id="nameRole" class="form-control" />
+                </div>
+             
+            </div>
+            <div class="modal-footer body">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="CreateAjax()">Отправить</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script>
+    function CreateAjax() {
+        var nameRole = document.getElementById("nameRole").value;
+
+jQuery.ajax({
+    url: '/Roles/CreateAjax/',
+    type: "POST",
+    dataType: "json",
+    data: { name: nameRole },
+success: function (query) {
+alert( query);
+}
+});
+};
+
+</script>

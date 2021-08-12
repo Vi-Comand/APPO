@@ -8,6 +8,7 @@ using SISPR.Models.DataBase.Basic.Location;
 using SISPR.Models.DataBase.Basic.User;
 using SISPR.Models.ViewModels;
 using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
@@ -79,7 +80,14 @@ namespace SISPR.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password) };
+                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password), PhoneNumber= model.PhoneNumber, snils = ulong.Parse(string.Join("", model.SNILS.Where(c => char.IsDigit(c)))) };
+               
+                
+                
+                
+                
+                
+                
                 Context.Users.Add(user);
                 Context.SaveChanges();
                 // добавляем пользователя
@@ -89,7 +97,7 @@ namespace SISPR.Controllers
 
 
 
-
+                    
 
 
 
@@ -188,7 +196,7 @@ namespace SISPR.Controllers
             {
                 region.name = result.suggestions[0].data.region_with_type;
                 region.search_name = result.suggestions[0].data.region;
-                region.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
+                region.fias_code = result.suggestions[0].data.fias_code;
             }
             catch
             {
@@ -226,7 +234,7 @@ namespace SISPR.Controllers
             {
                 mo.name = result.suggestions[0].data.area_with_type ?? result.suggestions[0].data.city_with_type;
                 mo.searсh_name = result.suggestions[0].data.area ?? result.suggestions[0].data.city;
-                mo.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
+                mo.fias_code = result.suggestions[0].data.fias_code;
                 if (result.suggestions[0].data.area == null)
                     mo.region_id = -10;
                 if (result.suggestions[0].data.city_with_type == null && result.suggestions[0].data.area_with_type == null)
@@ -256,7 +264,7 @@ namespace SISPR.Controllers
             {
                 city.name = result.suggestions[0].data.city_with_type ?? result.suggestions[0].data.settlement_with_type;
                 city.search_name = result.suggestions[0].data.city ?? result.suggestions[0].data.settlement;
-                city.fias_code = Convert.ToDouble(result.suggestions[0].data.fias_code);
+                city.fias_code = result.suggestions[0].data.fias_code;
                 if (result.suggestions[0].data.area == null)
                     city.mo_id = -10;
                 if (result.suggestions[0].data.city_with_type == null && result.suggestions[0].data.area_with_type == null)
@@ -288,7 +296,7 @@ namespace SISPR.Controllers
             {
                 oo.name = result.suggestions[0].data.name.full;
                 oo.name_short = result.suggestions[0].data.name.@short;
-                oo.inn = Convert.ToInt64(result.suggestions[0].data.inn);
+                oo.inn = result.suggestions[0].data.inn;
             }
             catch
             {
