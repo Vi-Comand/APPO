@@ -47,16 +47,20 @@
                 </div>
                 @*</div>
                     <div class="row m-2">*@
-                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                    <input type="email" asp-for="Email" class="form-control inp-theme" onkeyup="ChangeEmail()" id="emailInput" placeholder="name@example.com" required>
-                    <label for="floatingInput">Адрес электронной почты</label>
-                    <div class="valid-feedback">
-                        Все хорошо!
-                    </div>
-                    <div class="invalid-feedback">
-                        Введите коректный адрес электронной почты
-                    </div>
+            <div class=" col-12 col-md-6 col-lg-6 pe-md-3 ">
+                <div class="form-floating input-group" role="toolbar">
+                    <input type="email" asp-for="Email" class="form-control inp-theme col-8 " onkeyup="ChangeEmail()" id="emailInput" placeholder="name@example.com" required>
+                    <label for="emailInput">Адрес электронной почты</label>
+                    <a style="flex-direction: column; justify-content: center; display: inline-flex; " onclick="CheckEmail()" class="btn btn-sm btn-primary col-4 me-auto ms-auto" aria-describedby="emailInput">Подтвердить Email</a>
+                    
                 </div>
+                <div class="valid-feedback">
+                    Все хорошо!
+                </div>
+                <div class="invalid-feedback">
+                    Введите коректный адрес электронной почты
+                </div>
+            </div>
                 <div id="DivButPodtver" class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <a style="flex-direction: column; justify-content: center; display: inline-flex; " onclick="CheckEmail()" class="btn btn-sm btn-primary col-12 me-auto ">Подтвердить Email</a>
                 </div>

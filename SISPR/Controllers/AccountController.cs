@@ -3,6 +3,7 @@ using Dadata.Model;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SISPR.Controllers.Service;
 using SISPR.Models.DataBase;
 using SISPR.Models.DataBase.Basic.Location;
 using SISPR.Models.DataBase.Basic.User;
@@ -10,9 +11,7 @@ using SISPR.Models.ViewModels;
 using System;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using SISPR.Controllers.Service;
-using SISPR.Models.DataBase;
+
 
 namespace SISPR.Controllers
 {
@@ -44,12 +43,12 @@ namespace SISPR.Controllers
         public async Task<IActionResult> ConfirmedEmailAjax(string Email)
         {
             var checkKod = new CheckKod();
-            
-            Random rnd=new Random();
+
+            Random rnd = new Random();
             int _min = 1000;
             int _max = 9999;
-            var ConfirmKod=rnd.Next(_min, _max);
-           
+            var ConfirmKod = rnd.Next(_min, _max);
+
             EmailService emailService = new EmailService();
             await emailService.SendEmailAsync(Email, "Подтверждение Email", ConfirmKod.ToString());
             checkKod.hash = HashPass(ConfirmKod.ToString());
@@ -62,13 +61,13 @@ namespace SISPR.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckKod(int kod, string HashKod)
         {
-            if(HashPass(kod.ToString()) == HashKod)
+            if (HashPass(kod.ToString()) == HashKod)
                 return Json("true");
 
 
             return Json("false");
         }
-        
+
         //[HttpGet]
         //public IActionResult Register()
         //{
@@ -79,7 +78,7 @@ namespace SISPR.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password) };
+                User user = new User { Email = model.Email, f = model.F, i = model.I, o = model.O, PasswordHash = HashPass(model.Password) };
                 Context.Users.Add(user);
                 Context.SaveChanges();
                 // добавляем пользователя

@@ -2648,7 +2648,7 @@ textarea.form-control-lg {
 }
 .input-group > .form-control:focus,
 .input-group > .form-select:focus {
-  z-index: 3;
+ /* z-index: 3;*/
 }
 .input-group .btn {
   position: relative;
