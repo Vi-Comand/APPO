@@ -3,6 +3,7 @@ using Dadata.Model;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SISPR.Controllers.Service;
 using SISPR.Models.DataBase;
 using SISPR.Models.DataBase.Basic.Location;
 using SISPR.Models.DataBase.Basic.User;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 using SISPR.Controllers.Service;
 using SISPR.Models.DataBase;
+
 
 namespace SISPR.Controllers
 {
@@ -77,13 +79,13 @@ namespace SISPR.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckKod(int kod, string HashKod)
         {
-            if(HashPass(kod.ToString()) == HashKod)
+            if (HashPass(kod.ToString()) == HashKod)
                 return Json("true");
 
 
             return Json("false");
         }
-        
+
         //[HttpGet]
         //public IActionResult Register()
         //{
