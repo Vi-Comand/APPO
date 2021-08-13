@@ -15,7 +15,7 @@ namespace SISPR.Models.ViewModels
         [Required]
         [Display(Name = "Имя")]
         public string I { get; set; }
-        [Required]
+
         [Display(Name = "Отчество")]
         public string O { get; set; }
 
@@ -27,7 +27,7 @@ namespace SISPR.Models.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
-        
+
 
         [Required]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]

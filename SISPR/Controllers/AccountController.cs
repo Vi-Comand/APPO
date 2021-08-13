@@ -27,7 +27,7 @@ namespace SISPR.Controllers
 
         private IdentityContext Context;
         private Context ContextDB;
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IdentityContext context,Context contextDB)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IdentityContext context, Context contextDB)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -71,11 +71,7 @@ namespace SISPR.Controllers
                 checkKod.messege = $" {Email} уже используется!";
                 return Json(checkKod);
             }
-
-            
-        
-
-    }
+        }
         [HttpPost]
         public async Task<IActionResult> CheckKod(int kod, string HashKod)
         {
@@ -96,9 +92,9 @@ namespace SISPR.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 if (await ContextDB.Region.AnyAsync(x => x.fias_code == model.Region.fias_code))
-                 model.Region = await ContextDB.Region.FirstAsync(x => x.fias_code == model.Region.fias_code);
+                    model.Region = await ContextDB.Region.FirstAsync(x => x.fias_code == model.Region.fias_code);
                 else
                 {
 
@@ -145,9 +141,22 @@ namespace SISPR.Controllers
                 }
 
 
-                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password), PhoneNumber= model.PhoneNumber, snils = ulong.Parse(string.Join("", model.SNILS.Where(c => char.IsDigit(c)))),region_id=model.Region.region_id,mo_id
-                =model.MO.mo_id,city_id = model.City.city_id,oo_id = model.OO.oo_id};
-                
+                User user = new User
+                {
+                    Email = model.Email,
+                    f = model.F,
+                    i = model.I,
+                    o = model.O,
+                    PasswordHash = HashPass(model.Password),
+                    PhoneNumber = model.PhoneNumber,
+                    snils = ulong.Parse(string.Join("", model.SNILS.Where(c => char.IsDigit(c)))),
+                    region_id = model.Region.region_id,
+                    mo_id
+                = model.MO.mo_id,
+                    city_id = model.City.city_id,
+                    oo_id = model.OO.oo_id
+                };
+
                 Context.Users.Add(user);
                 Context.SaveChanges();
 
@@ -356,6 +365,20 @@ namespace SISPR.Controllers
                 oo.oo_id = -30;
             }
             return Json(oo);
+        }
+
+
+        public async Task<IActionResult> CheckSnilsAjax(string Snils1)
+        {
+            ulong snils = ulong.Parse(string.Join("", Snils1.Where(c => char.IsDigit(c))));
+            if (!Context.Users.Any(x => x.snils == snils))
+            {
+                return Json(0);
+            }
+            else
+            {
+                return Json(1);
+            }
         }
     }
 }

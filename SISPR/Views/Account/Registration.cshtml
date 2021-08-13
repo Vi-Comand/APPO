@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12 col-md-9 row-alt " id="div_first">
                 <h5 class="col-12">Создайте аккаунт ИРО</h5>
-                @*<div class="row m-2">*@
+
                 <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                     <input type="text" asp-for="F" class="form-control inp-theme" id="FaInput" placeholder="Иванов*" required>
                     <label for="floatingInput">Фамилия</label>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 @*</div>
-        <div class="row m-2">*@
+                    <div class="row m-2">*@
                 <div class=" col-12 col-md-12 col-lg-6 pe-md-3 " id="DivButPodtver">
                     <div class="form-floating input-group" role="toolbar">
                         <input type="email" asp-for="Email" class="form-control inp-theme col-8 " onkeyup="ChangeEmail()" id="emailInput" placeholder="name@example.com" required>
@@ -76,7 +76,7 @@
                         </div>
                         <a style="flex-direction: column; justify-content: center; display: inline-flex; " onclick="ChangeEmail()" class="btn btn-sm btn-primary col-4 me-auto ms-auto" aria-describedby="KodPodtver">Сменить Email</a>
                     </div>
-                    
+
                 </div>
                 <div class="form-floating col-12 col-md-12 col-lg-6 pe-md-3 ">
                     <div class=" input-group " role="toolbar">
@@ -99,186 +99,191 @@
                     </div>
                 </div>
 
-                    <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
+                <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">У меня есть акаунт</a>
 
-                    <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 disabled" id="BtnNext" >Далее</button>
+                <a onclick="next()" class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 disabled" id="BtnNext">Далее</a>
 
+            </div>
+
+            <div class="col-12 col-md-9 row-alt d-none" id="div_second">
+                <h5 class="col-12">Создайте аккаунт ИРО</h5>
+                @*<div class="row m-2">*@
+            <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                <div class=" form-floating input-group ">
+                    <input type="text" class="form-control inp-theme" id="regionInput" asp-for="Region.name" onchange="regDa(this.value)" placeholder="Краснодар">
+                    <label for="regionInput">Регион</label>
+                    <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
                 </div>
-
-                <div class="col-12 col-md-9 row-alt d-none" id="div_second">
-                    <h5 class="col-12">Создайте аккаунт ИРО</h5>
-                    @*<div class="row m-2">*@
-                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                        <input type="text" class="form-control inp-theme" id="regionInput" asp-for="Region.name" onchange="regDa(this.value)" placeholder="Краснодар">
-                        <input type="hidden" asp-for="Region.search_name"  id="regionNoTypeInput">
-                        <input type="hidden" asp-for="Region.fias_code" id="regionIdInput">
-                        <label for="regionInput">Регион</label>
-                        <div class="invalid-feedback">
-                            Введите регион
-                        </div>
-                        <div class="invalid-feedback " id="regInvDiv">
-                            Регион не найден. Попробуйте ввести заново
-                        </div>
+                    <input type="hidden" asp-for="Region.search_name" id="regionNoTypeInput">
+                    <input type="hidden" asp-for="Region.fias_code" id="regionIdInput">
+                    
+                    <div class="invalid-feedback">
+                        Введите регион
                     </div>
-                    <script>
-                        class Address {
+                    <div class="invalid-feedback " id="regInvDiv">
+                        Регион не найден. Попробуйте ввести заново
+                    </div>
+                </div>
+                <script>
+                    class Address {
 
-                            constructor() {
+                        constructor() {
 
 
-                                this.regIn = new Object(document.getElementById("regionInput"));
-                                this.regNoTypeIn = new Object(document.getElementById("regionNoTypeInput"));
-                                this.regIdIn = new Object(document.getElementById("regionIdInput"));
-                                this.regInvDiv = new Object(document.getElementById("regInvDiv"));
-                                this.moIn = new Object(document.getElementById("moInput"));
-                                this.moNoTypeIn = new Object(document.getElementById("moNoTypeInput"));
-                                this.moIdIn = new Object(document.getElementById("moIdInput"));
-                                this.moInvDiv = new Object(document.getElementById("moInvDiv"));
-                                this.cityIn = new Object(document.getElementById("cityInput"));
-                                this.cityNoTypeIn = new Object(document.getElementById("cityNoTypeInput"));
-                                this.cityIdIn = new Object(document.getElementById("cityIdInput"));
-                                this.cityInvDiv = new Object(document.getElementById("cityInvDiv"));
-                                this.ooShortIn = new Object(document.getElementById("ooShortInput"));
-                                this.ooInnIn = new Object(document.getElementById("ooInnInput"));
-                                this.ooNameIn = new Object(document.getElementById("ooNameInput"));
-                                this.ooInvDiv = new Object(document.getElementById("ooInvDiv"));
-                            }
+                            this.regIn = new Object(document.getElementById("regionInput"));
+                            this.regNoTypeIn = new Object(document.getElementById("regionNoTypeInput"));
+                            this.regIdIn = new Object(document.getElementById("regionIdInput"));
+                            this.regInvDiv = new Object(document.getElementById("regInvDiv"));
+                            this.moIn = new Object(document.getElementById("moInput"));
+                            this.moNoTypeIn = new Object(document.getElementById("moNoTypeInput"));
+                            this.moIdIn = new Object(document.getElementById("moIdInput"));
+                            this.moInvDiv = new Object(document.getElementById("moInvDiv"));
+                            this.cityIn = new Object(document.getElementById("cityInput"));
+                            this.cityNoTypeIn = new Object(document.getElementById("cityNoTypeInput"));
+                            this.cityIdIn = new Object(document.getElementById("cityIdInput"));
+                            this.cityInvDiv = new Object(document.getElementById("cityInvDiv"));
+                            this.ooShortIn = new Object(document.getElementById("ooShortInput"));
+                            this.ooInnIn = new Object(document.getElementById("ooInnInput"));
+                            this.ooNameIn = new Object(document.getElementById("ooNameInput"));
+                            this.ooInvDiv = new Object(document.getElementById("ooInvDiv"));
                         }
+                    }
 
-                        function regDa(adr) {
-                            var adress = new Address();
-                            if (adress.regIn.value == "") {
+                    function regDa(adr) {
+                        var adress = new Address();
+                        if (adress.regIn.value == "") {
 
 
-                                adress.cityIn.value = null;
-                                adress.ooShortIn.value = null;
-                                adress.moIn.value = null;
-                                adress.cityIn.disabled = true;
-                                adress.ooShortIn.disabled = true;
-                                adress.moIn.disabled = true;
-                            }
-                            else {
-                                jQuery.ajax({
-                                    url: '/Account/RegionAjax/',
-                                    type: "POST",
-                                    dataType: "json",
-                                    data: { adr: adr },
-                                    success: function (query) {
-                                        if (query.region_id == -30) {
-                                            adress.regIn.value = "";
-                                            adress.regInvDiv.classList.add("d-block");
-                                            adress.moIn.setAttribute("disabled", "disabled");
-                                        }
-                                        else {
-                                            adress.regIn.value = query.name;
-                                            adress.regNoTypeIn.value = query.search_name;
-                                            adress.regIdIn.value = query.fias_code;
-                                            adress.moIn.disabled = false;
-                                            adress.regInvDiv.classList.remove("d-block");
-                                        }
-                                    }
-                                });
-                            }
-
-                        };
-
-                        function moDa(adr) {
-                            var adress = new Address();
-                            if (adress.moIn.value == "") {
-
-                                adress.cityIn.value = null;
-                                adress.ooShortIn.value = null;
-                                adress.cityIn.disabled = true;
-                                adress.ooShortIn.disabled = true;
-                            }
-                            else {
-                                jQuery.ajax({
-                                    url: '/Account/MoAjax/',
-                                    type: "POST",
-                                    dataType: "json",
-                                    data: { adr: adr, reg: adress.regNoTypeIn.value },
-                                    success: function (query) {
-                                        adress.moIn.value = query.name;
-                                        adress.moNoTypeIn.value = query.searсh_name;
-                                        adress.moIdIn.value = query.fias_code;
-                                        if (query.region_id == -10) {
-                                            adress.cityIn.value = query.name;
-                                            adress.cityNoTypeIn.value = query.searсh_name;
-                                            adress.cityIdIn.value = query.fias_code;
-                                            adress.cityIn.setAttribute("disabled", "false");
-                                            adress.moInvDiv.classList.remove("d-block");
-                                        }
-                                        else if (query.region_id == -30 || query.region_id == -20) {
-                                            adress.moIn.value = "";
-                                            adress.moInvDiv.classList.add("d-block");
-                                            adress.cityIn.disabled = true;
-                                            adress.ooShortIn.disabled = true;
-                                        }
-                                        else {
-
-                                            adress.cityIn.disabled = false;
-                                            adress.moInvDiv.classList.remove("d-block");
-                                        }
-                                    }
-                                });
-                            }
-
-                        };
-
-                        function cityDa(adr) {
-                            var adress = new Address();
-
-                            if (adress.cityIn.value == "") {
-                                adress.ooShortIn.value = null;
-                                adress.ooShortIn.setAttribute("disabled", "disabled");
-                            }
-                            else {
-                                jQuery.ajax({
-                                    url: '/Account/CityAjax/',
-                                    type: "POST",
-                                    dataType: "json",
-                                    data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value },
-                                    success: function (query) {
-
-                                        if (query.mo_id == -30 || query.mo_id == -20) {
-                                            adress.cityIn.value = "";
-                                            adress.cityInvDiv.classList.add("d-block");
-                                            adress.ooShortIn.setAttribute("disabled", "disabled");
-                                        }
-                                        else {
-                                            adress.cityIn.value = query.name;
-                                            adress.cityNoTypeIn.value = query.search_name;
-                                            adress.cityIdIn.value = query.fias_code;
-                                            adress.ooShortIn.disabled = false;
-                                            adress.cityInvDiv.classList.remove("d-block");
-                                        }
-                                    }
-                                });
-                            }
-
-                        };
-
-                        function ooDa(adr) {
-                            var adress = new Address();
+                            adress.cityIn.value = null;
+                            adress.ooShortIn.value = null;
+                            adress.moIn.value = null;
+                            adress.cityIn.disabled = true;
+                            adress.ooShortIn.disabled = true;
+                            adress.moIn.disabled = true;
+                        }
+                        else {
                             jQuery.ajax({
-                                url: '/Account/OoAjax/',
+                                url: '/Account/RegionAjax/',
                                 type: "POST",
                                 dataType: "json",
-                                data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value, city: adress.cityNoTypeIn.value },
+                                data: { adr: adr },
                                 success: function (query) {
-                                    if (query.oo_id == -30 || query.oo_id == -20) {
-                                        adress.ooShortIn.value = "";
-                                        adress.ooInvDiv.classList.add("d-block");
+                                    if (query.region_id == -30) {
+                                        adress.regIn.value = "";
+                                        adress.regInvDiv.classList.add("d-block");
+                                        adress.moIn.setAttribute("disabled", "disabled");
                                     }
                                     else {
-                                        adress.ooShortIn.value = query.name_short;
-                                        adress.ooNameIn.value = query.name;
-                                        adress.ooInnIn.value = query.inn;
-                                        adress.ooInvDiv.classList.remove("d-block");
+                                        adress.regIn.value = query.name;
+                                        adress.regNoTypeIn.value = query.search_name;
+                                        adress.regIdIn.value = query.fias_code;
+                                        adress.moIn.disabled = false;
+                                        adress.regInvDiv.classList.remove("d-block");
                                     }
                                 }
                             });
-                        };
+                        }
+
+                    };
+
+                    function moDa(adr) {
+                        var adress = new Address();
+                        if (adress.moIn.value == "") {
+
+                            adress.cityIn.value = null;
+                            adress.ooShortIn.value = null;
+                            adress.cityIn.disabled = true;
+                            adress.ooShortIn.disabled = true;
+                        }
+                        else {
+                            jQuery.ajax({
+                                url: '/Account/MoAjax/',
+                                type: "POST",
+                                dataType: "json",
+                                data: { adr: adr, reg: adress.regNoTypeIn.value },
+                                success: function (query) {
+                                    adress.moIn.value = query.name;
+                                    adress.moNoTypeIn.value = query.searсh_name;
+                                    adress.moIdIn.value = query.fias_code;
+                                    if (query.region_id == -10) {
+                                        adress.cityIn.value = query.name;
+                                        adress.cityNoTypeIn.value = query.searсh_name;
+                                        adress.cityIdIn.value = query.fias_code;
+                                        adress.cityIn.setAttribute("disabled", "false");
+                                        adress.moInvDiv.classList.remove("d-block");
+                                        adress.ooShortIn.disabled = false;
+                                        adress.cityIn.disabled = false;
+                                    }
+                                    else if (query.region_id == -30 || query.region_id == -20) {
+                                        adress.moIn.value = "";
+                                        adress.moInvDiv.classList.add("d-block");
+                                        adress.cityIn.disabled = true;
+                                        adress.ooShortIn.disabled = true;
+                                    }
+                                    else {
+                                        adress.cityIn.disabled = false;
+                                        adress.moInvDiv.classList.remove("d-block");
+                                    }
+                                }
+                            });
+                        }
+
+                    };
+
+                    function cityDa(adr) {
+                        var adress = new Address();
+
+                        if (adress.cityIn.value == "") {
+                            adress.ooShortIn.value = null;
+                            adress.ooShortIn.setAttribute("disabled", "disabled");
+                        }
+                        else {
+                            jQuery.ajax({
+                                url: '/Account/CityAjax/',
+                                type: "POST",
+                                dataType: "json",
+                                data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value },
+                                success: function (query) {
+
+                                    if (query.mo_id == -30 || query.mo_id == -20) {
+                                        adress.cityIn.value = "";
+                                        adress.cityInvDiv.classList.add("d-block");
+                                        adress.ooShortIn.setAttribute("disabled", "disabled");
+                                    }
+                                    else {
+                                        adress.cityIn.value = query.name;
+                                        adress.cityNoTypeIn.value = query.search_name;
+                                        adress.cityIdIn.value = query.fias_code;
+                                        adress.ooShortIn.disabled = false;
+                                        adress.cityInvDiv.classList.remove("d-block");
+                                    }
+                                }
+                            });
+                        }
+
+                    };
+
+                    function ooDa(adr) {
+                        var adress = new Address();
+                        jQuery.ajax({
+                            url: '/Account/OoAjax/',
+                            type: "POST",
+                            dataType: "json",
+                            data: { adr: adr, reg: adress.regNoTypeIn.value, mo: adress.moNoTypeIn.value, city: adress.cityNoTypeIn.value },
+                            success: function (query) {
+                                if (query.oo_id == -30 || query.oo_id == -20) {
+                                    adress.ooShortIn.value = "";
+                                    adress.ooInvDiv.classList.add("d-block");
+                                }
+                                else {
+                                    adress.ooShortIn.value = query.name_short;
+                                    adress.ooNameIn.value = query.name;
+                                    adress.ooInnIn.value = query.inn;
+                                    adress.ooInvDiv.classList.remove("d-block");
+                                }
+                            }
+                        });
+                    };
 
 
 
@@ -287,12 +292,16 @@
 
 
 
-                    </script>
-                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                </script>
+                <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                    <div class=" form-floating input-group ">
                         <input type="text" class="form-control inp-theme " id="moInput" onchange="moDa(this.value)" asp-for="MO.name" placeholder="Краснодар" disabled>
-                        <input type="text" asp-for="MO.searсh_name" id="moNoTypeInput">
-                        <input type="text" asp-for="MO.fias_code" id="moIdInput">
-                        <label for="moInput">МО</label>
+                        <label for="moInput">МО</label> 
+                        <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
+                    </div>
+                        <input type="hidden" asp-for="MO.searсh_name" id="moNoTypeInput">
+                        <input type="hidden" asp-for="MO.fias_code" id="moIdInput">
+                        
                         <div class="invalid-feedback">
                             Введите муниципалитет
                         </div>
@@ -303,54 +312,62 @@
 
 
 
-                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                        <input type="text" class="form-control inp-theme" asp-for="City.name" id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
-                        <input type="hidden" asp-for="City.search_name" id="cityNoTypeInput">
-                        <input type="hidden" asp-for="City.fias_code" id="cityIdInput">
-                        <label for="cityInput">Населенный пункт</label>
-                        <div class="invalid-feedback">
-                            Введите населенный пункт
+                    <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                        <div class=" form-floating input-group ">
+                            <input type="text" class="form-control inp-theme" asp-for="City.name" id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
+                            <label for="cityInput">Населенный пункт</label>
+                            <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
                         </div>
-                        <div class="invalid-feedback " id="cityInvDiv">
-                            Населенный пункт не найден. Попробуйте ввести заново
+                            <input type="hidden" asp-for="City.search_name" id="cityNoTypeInput">
+                            <input type="hidden" asp-for="City.fias_code" id="cityIdInput">
+                           
+                            <div class="invalid-feedback">
+                                Введите населенный пункт
+                            </div>
+                            <div class="invalid-feedback " id="cityInvDiv">
+                                Населенный пункт не найден. Попробуйте ввести заново
+                            </div>
                         </div>
-                    </div>
                     @*</div>
-            <div class="row m-2">*@
-                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                        <input type="text" class="form-control inp-theme" asp-for="OO.name" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled>
-                        <input type="text" asp-for="OO.inn" id="ooInnInput">
-                        <input type="hidden" asp-for="OO.name_short" id="ooNameInput">
-                        <label for="ooInput">Краткое наименование ОО</label>
-                        <div class="invalid-feedback">
-                            Введите краткое наименование ОО
+        <div class="row m-2">*@
+                    <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                        <div class=" form-floating input-group ">
+                            <input type="text" class="form-control inp-theme" asp-for="OO.name" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled> 
+                            <label for="ooInput">Краткое название ОО</label>
+                            <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
                         </div>
-                        <div class="invalid-feedback " id="ooInvDiv">
-                            Образовательная организация не найдена. Попробуйте ввести заново
+                            <input type="hidden" asp-for="OO.inn" id="ooInnInput">
+                            <input type="hidden" asp-for="OO.name_short" id="ooNameInput">
+                           
+                            <div class="invalid-feedback">
+                                Введите краткое наименование ОО
+                            </div>
+                            <div class="invalid-feedback " id="ooInvDiv">
+                                Образовательная организация не найдена. Попробуйте ввести заново
+                            </div>
                         </div>
-                    </div>
                     <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
                         <input type="text" class="form-control inp-theme mask-phone" asp-for="PhoneNumber" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
                         <label for="telInput">Телефон</label>
                         <div class="invalid-feedback">
-                            Пароль должен состоять не менее чем из 6 символов
+                            Введите коректный телефон
                         </div>
                     </div>
                     <script>
                         $('.mask-phone').mask('+7 (999) 999-99-99');
                     </script>
                     <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                        <input type="text" class="form-control inp-theme mask-snils" asp-for="SNILS" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}">
+                        <input type="text" class="form-control inp-theme mask-snils" asp-for="SNILS" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}" onblur="CheckSnils(this.value)">
                         <label for="snilsInput">СНИЛС</label>
                         <div class="invalid-feedback">
-                            Пароль не совподает
+                            Введите коректный снилс
                         </div>
                     </div>
                     <script>
                         $('.mask-snils').mask('999-999-999 99');
                     </script>
 
-                    <a asp-controller="Account" asp-action="Login" style="flex-direction: column; justify-content: center; display: inline-flex; " class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
+                    <a style="flex-direction: column; justify-content: center; display: inline-flex;" onclick="back()" class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
 
                     <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 " asp-action="Register" asp-controller="Account">Регистрация</button>
 
@@ -359,13 +376,13 @@
 
 
 
-                <div class="col-3 reg">
-                    <div width="200" height="200">
-                        <img width="200" height="200" class="img-card-home" src="~/file/logo.png" />
-                    </div>
-                    <p>Один аккаунт - для всех сервисов Института развития образования Краснодарского края</p>
+            <div class="col-3 reg">
+                <div width="200" height="200">
+                    <img width="200" height="200" class="img-card-home" src="~/file/logo.png" />
                 </div>
+                <p>Один аккаунт - для всех сервисов Института развития образования Краснодарского края</p>
             </div>
+        </div>
     </div>
 </form>
 
@@ -400,7 +417,8 @@
                         divPodtver.classList.remove("d-none");
                         var emailInput = document.getElementById("emailInput");
                         emailInput.setAttribute("readonly", "true");
-                        emailInput.setAttribute("disabled", "disabled");
+                        emailInput.removeAttribute("onkeyup");
+                        // emailInput.setAttribute("disabled", "disabled");
                         var DivButPodtver = document.getElementById("DivButPodtver");
                         DivButPodtver.classList.remove("d-none");
                         var APodtver = document.getElementById("APodtver");
@@ -409,8 +427,8 @@
                         divKodInvalid.classList.remove("d-block");
                         var pass1 = document.getElementById("passwordInput").value;
                         var pass2 = document.getElementById("passwordCheckInput").value;
-                        if (pass1 == pass2 && pass1.length > 5) {
-                            var btnNext = document.getElementById("btnNext");
+                        if (pass1 == pass2 && pass1.length > 5 && pass2!="") {
+                            var btnNext = document.getElementById("BtnNext");
                             btnNext.classList.remove("disabled");
                         }
                     }
@@ -434,7 +452,7 @@
 
         var DivButPodtver = document.getElementById("DivButPodtver");
         DivButPodtver.classList.add("d-none");
-        alert(Email);
+
         jQuery.ajax({
             url: '/Account/ConfirmedEmailAjax/',
             type: "POST",
@@ -442,7 +460,7 @@
             data: { Email: Email },
             success: function (query) {
                 HashKod = query.hash;
-                
+
                 alert(query.messege);
                 if (HashKod == null) {
                     var divKodPodtver = document.getElementById("DivKodPodtver");
@@ -472,16 +490,16 @@
             btnNext.classList.add("disabled");
         }
         else if (pass2 == "" && pass1.length < 7) {
-            
+
             divInvPass1.classList.add("d-block");
             divInvPass2.classList.remove("d-block");
             btnNext.classList.add("disabled");
         }
         else {
-           
+
             divInvPass1.classList.remove("d-block");
             divInvPass2.classList.remove("d-block");
-            if (DivPodtver.classList.contains("d-none")==false) {
+            if (DivPodtver.classList.contains("d-none") == false) {
                 btnNext.classList.remove("disabled");
             }
         }
@@ -493,7 +511,7 @@
         var divInvPass2 = document.getElementById("divInvPass2");
         var btnNext = document.getElementById("BtnNext");
         var DivPodtver = document.getElementById("DivPodtver");
-        
+
         if (pass2 != "" && pass1 != pass2) {
             divInvPass2.classList.add("d-block");
             divInvPass1.classList.remove("d-block");
@@ -531,7 +549,7 @@
                         if (!form.checkValidity()) {
                             event.preventDefault();
                             event.stopPropagation();
-                         
+
                             form.classList.add('was-validated');
                         } else if (n == 0) {
 
@@ -540,7 +558,7 @@
                             form.classList.remove('was-validated');
                             event.preventDefault();
                             event.stopPropagation();
-                           
+
                         } else {
                             form.classList.remove('was-validated');
                         }
@@ -554,12 +572,62 @@
 
 
     function next() {
+
+        var form = document.getElementById('contact-form');
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            form.classList.add('was-validated');
+        } else {
+            var DivFirst = document.getElementById('div_first');
+            var DivSecond = document.getElementById('div_second');
+            var regInput = document.getElementById('regInput');
+            DivFirst.classList.add("d-none");
+            DivSecond.classList.remove("d-none");
+            $('#regionInput').prop('required', true);
+            $('#moInput').prop('required', true);
+            $('#cityInput').prop('required', true);
+            $('#ooShortInput').prop('required', true);
+            $('#telInput').prop('required', true);
+            $('#snilsInput').prop('required', true);
+            form.classList.remove('was-validated');
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+    }
+    function back() {
         var DivFirst = document.getElementById('div_first');
         var DivSecond = document.getElementById('div_second');
         var regInput = document.getElementById('regInput');
-        DivFirst.classList.add("d-none");
-        DivSecond.classList.remove("d-none");
-        $('#regionInput').prop('required', true);
-        $('#snilsInput').prop('required', true);
+        DivFirst.classList.remove("d-none");
+        DivSecond.classList.add("d-none");
+        $('#regionInput').prop('required', false);
+        $('#moInput').prop('required', false);
+        $('#cityInput').prop('required', false);
+        $('#ooShortInput').prop('required', false);
+        $('#telInput').prop('required', false);
+        $('#snilsInput').prop('required', false);
+    }
+
+    function CheckSnils(snils) {
+        
+       
+        console.log(document.getElementById("snilsInput").validity.rangeUnderflow);
+        if (document.getElementById("snilsInput").validity.valid ==true) {
+            jQuery.ajax({
+                url: '/Account/CheckSnilsAjax/',
+                type: "POST",
+                dataType: "json",
+                data: { Snils1: snils },
+                success: function (query) {
+                    if (query == 1) {
+                        var Sn = document.getElementById("snilsInput").value = "";
+                        alert("Данный снилс уже используется. Проверте вводимые данные");
+                    }
+                }
+            });
+        }
     }
 </script>
