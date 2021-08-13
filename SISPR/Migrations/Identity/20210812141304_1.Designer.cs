@@ -9,8 +9,8 @@ using SISPR.Models.DataBase;
 namespace SISPR.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20210802105718_0011")]
-    partial class _0011
+    [Migration("20210812141304_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,16 +217,10 @@ namespace SISPR.Migrations.Identity
                     b.Property<int>("oo_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("pass")
-                        .HasColumnType("longtext");
-
                     b.Property<int>("region_id")
                         .HasColumnType("int");
 
                     b.Property<ulong>("snils")
-                        .HasColumnType("bigint unsigned");
-
-                    b.Property<ulong>("tel")
                         .HasColumnType("bigint unsigned");
 
                     b.Property<int>("user_id")

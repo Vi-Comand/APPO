@@ -17,7 +17,7 @@ namespace SISPR.Models.DataBase.Basic.User
         public string i { get; set; }
         public string o { get; set; }
         public ulong snils  { get; set; }
-      //  public string email { get; set; }
+    
         
       
         public int mo_id { get; set; }

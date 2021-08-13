@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using SISPR.Controllers.Service;
 using SISPR.Models.DataBase;
 
@@ -23,12 +24,13 @@ namespace SISPR.Controllers
         private readonly SignInManager<User> _signInManager;
 
         private IdentityContext Context;
-
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IdentityContext context)
+        private Context ContextDB;
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IdentityContext context,Context contextDB)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             Context = context;
+            ContextDB = contextDB;
         }
 
         public IActionResult Login()
@@ -44,22 +46,34 @@ namespace SISPR.Controllers
 
         public async Task<IActionResult> ConfirmedEmailAjax(string Email)
         {
-            var checkKod = new CheckKod();
+
+            if (!Context.Users.Any(x => x.Email.ToLower() == Email.ToLower()))
+            {
+                var checkKod = new CheckKod();
+
+
+                Random rnd = new Random();
+                int _min = 1000;
+                int _max = 9999;
+                var ConfirmKod = rnd.Next(_min, _max);
+
+                EmailService emailService = new EmailService();
+                await emailService.SendEmailAsync(Email, "Подтверждение Email", ConfirmKod.ToString());
+                checkKod.hash = HashPass(ConfirmKod.ToString());
+                checkKod.messege = $"На почту {Email} отправлено код для подтверждения!";
+                return Json(checkKod);
+            }
+            else
+            {
+                var checkKod = new CheckKod();
+                checkKod.messege = $" {Email} уже используется!";
+                return Json(checkKod);
+            }
+
             
-            Random rnd=new Random();
-            int _min = 1000;
-            int _max = 9999;
-            var ConfirmKod=rnd.Next(_min, _max);
-           
-            EmailService emailService = new EmailService();
-            await emailService.SendEmailAsync(Email, "Подтверждение Email", ConfirmKod.ToString());
-            checkKod.hash = HashPass(ConfirmKod.ToString());
-            checkKod.messege = $"На почту {Email} отправлено код для подтверждения!";
-            return Json(checkKod);
+        
 
-
-
-        }
+    }
         [HttpPost]
         public async Task<IActionResult> CheckKod(int kod, string HashKod)
         {
@@ -80,28 +94,65 @@ namespace SISPR.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password), PhoneNumber= model.PhoneNumber, snils = ulong.Parse(string.Join("", model.SNILS.Where(c => char.IsDigit(c)))) };
                
-                
-                
-                
-                
-                
+                if (await ContextDB.Region.AnyAsync(x => x.fias_code == model.Region.fias_code))
+                 model.Region = await ContextDB.Region.FirstAsync(x => x.fias_code == model.Region.fias_code);
+                else
+                {
+
+
+                    ContextDB.Region.Add(model.Region);
+
+                    ContextDB.SaveChanges();
+
+                }
+                if (await ContextDB.MO.AnyAsync(x => x.fias_code == model.MO.fias_code))
+                    model.MO = await ContextDB.MO.FirstAsync(x => x.fias_code == model.MO.fias_code);
+                else
+                {
+
+                    model.MO.region_id = model.Region.region_id;
+                    ContextDB.MO.Add(model.MO);
+
+                    ContextDB.SaveChanges();
+                }
+
+                if (await ContextDB.City.AnyAsync(x => x.fias_code == model.City.fias_code))
+                    model.City = await ContextDB.City.FirstAsync(x => x.fias_code == model.City.fias_code);
+                else
+                {
+
+                    model.City.mo_id = model.MO.mo_id;
+                    ContextDB.City.Add(model.City);
+
+                    ContextDB.SaveChanges();
+
+                }
+
+
+                if (await ContextDB.OO.AnyAsync(x => x.inn == model.OO.inn))
+                    model.OO = await ContextDB.OO.FirstAsync(x => x.inn == model.OO.inn);
+                else
+                {
+
+                    model.OO.city_id = model.City.city_id;
+                    ContextDB.OO.Add(model.OO);
+
+                    ContextDB.SaveChanges();
+
+                }
+
+
+                User user = new User { Email = model.Email,f = model.F, i=model.I,o=model.O ,PasswordHash = HashPass (model.Password), PhoneNumber= model.PhoneNumber, snils = ulong.Parse(string.Join("", model.SNILS.Where(c => char.IsDigit(c)))),region_id=model.Region.region_id,mo_id
+                =model.MO.mo_id,city_id = model.City.city_id,oo_id = model.OO.oo_id};
                 
                 Context.Users.Add(user);
                 Context.SaveChanges();
+
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-
-
-
-                    
-
-
-
-
                     // установка куки
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");

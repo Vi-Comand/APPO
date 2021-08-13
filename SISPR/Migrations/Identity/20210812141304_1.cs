@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SISPR.Migrations.Identity
 {
-    public partial class _12 : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,11 +44,6 @@ namespace SISPR.Migrations.Identity
                     o = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     snils = table.Column<ulong>(type: "bigint unsigned", nullable: false),
-                    email = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    tel = table.Column<ulong>(type: "bigint unsigned", nullable: false),
-                    pass = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     mo_id = table.Column<int>(type: "int", nullable: false),
                     region_id = table.Column<int>(type: "int", nullable: false),
                     city_id = table.Column<int>(type: "int", nullable: false),

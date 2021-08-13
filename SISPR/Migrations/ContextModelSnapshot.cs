@@ -17,93 +17,96 @@ namespace SISPR.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.8");
 
-            modelBuilder.Entity("SISPR.Models.DataBase.Basic.User.User", b =>
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.City", b =>
                 {
-                    b.Property<int>("user_id")
+                    b.Property<int>("city_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Id")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("city_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("email")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("f")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("i")
+                    b.Property<string>("fias_code")
                         .HasColumnType("longtext");
 
                     b.Property<int>("mo_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("o")
+                    b.Property<string>("name")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("oo_id")
+                    b.Property<string>("search_name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("city_id");
+
+                    b.ToTable("City");
+                });
+
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.MO", b =>
+                {
+                    b.Property<int>("mo_id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("pass")
+                    b.Property<string>("fias_code")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("name")
                         .HasColumnType("longtext");
 
                     b.Property<int>("region_id")
                         .HasColumnType("int");
 
-                    b.Property<ulong>("snils")
-                        .HasColumnType("bigint unsigned");
+                    b.Property<string>("searсh_name")
+                        .HasColumnType("longtext");
 
-                    b.Property<ulong>("tel")
-                        .HasColumnType("bigint unsigned");
+                    b.HasKey("mo_id");
 
-                    b.HasKey("user_id");
+                    b.ToTable("MO");
+                });
 
-                    b.ToTable("User");
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.OO", b =>
+                {
+                    b.Property<int>("oo_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("city_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("inn")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("name_short")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("oo_id");
+
+                    b.ToTable("OO");
+                });
+
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.Region", b =>
+                {
+                    b.Property<int>("region_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("fias_code")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("search_name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("region_id");
+
+                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("SISPR.Models.DataBase.Course.Category_student", b =>

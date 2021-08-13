@@ -9,8 +9,8 @@ using SISPR.Models.DataBase;
 namespace SISPR.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210729062527_3")]
-    partial class _3
+    [Migration("20210812141257_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,48 +19,96 @@ namespace SISPR.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.8");
 
-            modelBuilder.Entity("SISPR.Models.DataBase.Basic.User.User", b =>
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.City", b =>
                 {
-                    b.Property<int>("user_id")
+                    b.Property<int>("city_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("fias_code")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("mo_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("search_name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("city_id");
+
+                    b.ToTable("City");
+                });
+
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.MO", b =>
+                {
+                    b.Property<int>("mo_id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("fias_code")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("region_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("searсh_name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("mo_id");
+
+                    b.ToTable("MO");
+                });
+
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.OO", b =>
+                {
+                    b.Property<int>("oo_id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("city_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("email")
+                    b.Property<string>("inn")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("f")
+                    b.Property<string>("name")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("i")
+                    b.Property<string>("name_short")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("mo_id")
-                        .HasColumnType("int");
+                    b.HasKey("oo_id");
 
-                    b.Property<string>("o")
-                        .HasColumnType("longtext");
+                    b.ToTable("OO");
+                });
 
-                    b.Property<int>("oo_id")
-                        .HasColumnType("int");
-
-                    b.Property<string>("pass")
-                        .HasColumnType("longtext");
-
+            modelBuilder.Entity("SISPR.Models.DataBase.Basic.Location.Region", b =>
+                {
                     b.Property<int>("region_id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<ulong>("snils")
-                        .HasColumnType("bigint unsigned");
+                    b.Property<int>("code")
+                        .HasColumnType("int");
 
-                    b.Property<ulong>("tel")
-                        .HasColumnType("bigint unsigned");
+                    b.Property<string>("fias_code")
+                        .HasColumnType("longtext");
 
-                    b.HasKey("user_id");
+                    b.Property<string>("name")
+                        .HasColumnType("longtext");
 
-                    b.ToTable("User");
+                    b.Property<string>("search_name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("region_id");
+
+                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("SISPR.Models.DataBase.Course.Category_student", b =>
