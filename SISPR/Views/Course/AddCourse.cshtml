@@ -103,42 +103,62 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Объем курсов</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme " onchange="Dadata(this.value)" id="dadata">
+                    <input type="text" class="form-control inp-theme ">
                 </div>
 
             </div>
             <script>
-                function Dadata(adr) {
-                    var da = document.getElementById("dadata");
+                class Address {
+
+                    constructor() {
+                        this.cityIn = new Object(document.getElementById("cityInput"));
+                        this.cityNoTypeIn = new Object(document.getElementById("cityNoTypeInput"));
+                        this.cityIdIn = new Object(document.getElementById("cityIdInput"));
+                        this.cityInvDiv = new Object(document.getElementById("cityInvDiv"));
+                    }
+                }
+
+
+                function cityDa(adr) {
+                    var da = document.getElementById("cityInput");
+                    var adress = new Address();
                     jQuery.ajax({
                         url: '/Course/AdresAjax/',
                         type: "POST",
                         dataType: "json",
                         data: { adr: adr },
                         success: function (query) {
-                            da.value = query;
+                            if (query.mo_id == -30 || query.mo_id == -20) {
+                                adress.cityIn.value = "";
+                                adress.cityInvDiv.classList.add("d-block");
+                            }
+                            else {
+                                adress.cityIn.value = query.name;
+                                adress.cityNoTypeIn.value = query.search_name;
+                                adress.cityIdIn.value = query.fias_code;
+                                adress.cityInvDiv.classList.remove("d-block");
+                            }
                         }
                     });
                 };
-                async function delayedGreeting() {
-                    window.setTimeout(() => {
-                        console.log('2');
-                    }, 2000);
-                };
+
             </script>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Место проведения</label>
                 <div class="col-sm-7">
-                    <select class="selectpicker show-tick form-control inp-theme" id="number" data-container="body" data-live-search="true" title="Выберите место проведения" data-hide-disabled="true">
-                        <option data-tokens="иро">Краснодар</option>
-                        <option data-tokens="mustard">Армавир</option>
-                        <option data-tokens="frosting">Сочи</option>
-                    </select>
-
+                    <input type="text" class="form-control inp-theme" @*asp-for="City.name"*@ id="cityInput" placeholder="Кущевский район, Красное" onchange="cityDa(this.value)">
+                    <input type="hidden" @*asp-for="City.search_name"*@ id="cityNoTypeInput">
+                    <input type="hidden" @*asp-for="City.fias_code"*@ id="cityIdInput">
+                    @*Класный селект Не удалять
+                        *@
+                    <div class="invalid-feedback " id="cityInvDiv">
+                        Населенный пункт не найден. Попробуйте ввести заново
+                    </div>
                 </div>
                 <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
+                    <a class="btn btn-info col-12"><i class="bi-search"></i></a>
                 </div>
+                
             </div>
 
             <div class="row mb-3">
@@ -150,56 +170,60 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. групп</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                    <input type="number" class="form-control inp-theme" id="inputEmail3" value="1">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. подгрупп</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                    <input type="number" class="form-control inp-theme" id="inputEmail3" value="0">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. слушателей в группе</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                    <input type="number" class="form-control inp-theme" id="inputEmail3" value="25">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Категория слушателей</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                    <select class="selectpicker show-tick form-control inp-theme" multiple id="SelKategor" data-container="body" data-live-search="true" title="Выберите категорию" data-hide-disabled="true">
+                        <option >Учителя русского языка</option>
+                        <option>Преподаватели</option>
+                        <option >Воспитатили</option>
+                    </select>
                 </div>
                 <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
+                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#KategorModal"><i class="bi-journal-plus"></i></a>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кафедра</label>
                 <div class="col-sm-7">
-                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option selected>Выберите кафедру</option>
+                    <select class="selectpicker show-tick form-control inp-theme" id="SelKafedra" data-container="body" data-live-search="true" title="Выберите кафедру" data-hide-disabled="true">
+                        
                         <option value="23">КФО</option>
                         <option value="69">ИАЦ</option>
                         <option value="26">КМИ</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
+                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#KafedraModal"><i class="bi-journal-plus"></i></a>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Руководитель курса</label>
                 <div class="col-sm-7">
-                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option selected>Выберите педагога</option>
+                    <select class="selectpicker show-tick form-control inp-theme" id="SelRukovod" data-container="body" data-live-search="true" title="Выберите руководителя" data-hide-disabled="true">
+                       
                         <option value="23">Белай</option>
                         <option value="69">Ивко</option>
                         <option value="26">Мокеева</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
-                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">+</a>
+                    <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#PrepodModal"><i class="bi-journal-plus"></i></a>
                 </div>
             </div>
             <div class="row mb-3">
@@ -217,9 +241,7 @@
                     <textarea class="form-control inp-theme" id="inputEmail3" rows="7"></textarea>
                 </div>
             </div>
-            <div class="row mb-3">
-                <a class="btn btn-theme" asp-action="CreateRaspisan" asp-controller="Course">Сохранить и заполнить расписание</a>
-            </div>
+
         </div>
         <div class="col-12 col-lg-5 justify-content-center">
             <h4>Информация о УТП</h4>
@@ -334,86 +356,58 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-8">
-            <h4>Адресс и организация</h4>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Регион</label>
-                <div class="col-sm-9">
-                    <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
-                        <option value="23">Краснодарский край</option>
-                        <option value="69">Ростовская область</option>
-                        <option value="26">Ставропольский край</option>
-                    </select>
+        @*    <div class="col-8">
+                <h4>Адресс и организация</h4>
+                <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-3 col-form-label">Регион</label>
+                    <div class="col-sm-9">
+                        <select class="form-select inp-theme" aria-label="Регион" id="regionInput">
+                            <option value="23">Краснодарский край</option>
+                            <option value="69">Ростовская область</option>
+                            <option value="26">Ставропольский край</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">МО</label>
-                <div class="col-sm-9">
-                    <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
-                        <option value="23">Краснодар</option>
-                        <option value="69">Сочи</option>
-                        <option value="26">Кущевский район</option>
-                    </select>
+                <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-3 col-form-label">МО</label>
+                    <div class="col-sm-9">
+                        <select class="form-select inp-theme" aria-label="Муниципалитет" id="moInput">
+                            <option value="23">Краснодар</option>
+                            <option value="69">Сочи</option>
+                            <option value="26">Кущевский район</option>
+                        </select>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Населенный пункт</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
-                </div>
-            </div>
-            @*</div>
-                <div class="row m-2">*@
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label" for="ooInput">Краткое наименование ОО</label>
-                <div class="col-sm-9">
-                    <input type="email" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-3 col-form-label">Населенный пункт</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control inp-theme" id="cityInput" placeholder="Краснодар">
+                    </div>
                 </div>
 
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label" for="ooInput">Краткое наименование ОО</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control inp-theme" id="ooInput" placeholder="СОШ №1">
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div class="col-4">
-            <h4>Опции</h4>
-            <ul id="yui_3_17_2_1_1626761899275_19"><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=today">Сегодняшние события</a></span></li><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=all">Все события</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=outline">Краткий отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=complete">Полный отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/stats/user.php?id=5563&amp;course=1">Статистика</a></span></li><li><span><a href="http://do.iro23.ru/report/usersessions/user.php">Сессии браузера</a></span></li><li><span><a href="http://do.iro23.ru/grade/report/overview/index.php?userid=5563&amp;id=1">Обзор оценок</a></span></li><li><span><a href="http://do.iro23.ru/course/user.php?mode=grade&amp;id=1&amp;user=5563">Оценка</a></span></li></ul>
-        </div>
+            <div class="col-4">
+                <h4>Опции</h4>
+                <ul id="yui_3_17_2_1_1626761899275_19"><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=today">Сегодняшние события</a></span></li><li><span><a href="http://do.iro23.ru/report/log/user.php?id=5563&amp;course=1&amp;mode=all">Все события</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=outline">Краткий отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/outline/user.php?id=5563&amp;course=1&amp;mode=complete">Полный отчет</a></span></li><li><span><a href="http://do.iro23.ru/report/stats/user.php?id=5563&amp;course=1">Статистика</a></span></li><li><span><a href="http://do.iro23.ru/report/usersessions/user.php">Сессии браузера</a></span></li><li><span><a href="http://do.iro23.ru/grade/report/overview/index.php?userid=5563&amp;id=1">Обзор оценок</a></span></li><li><span><a href="http://do.iro23.ru/course/user.php?mode=grade&amp;id=1&amp;user=5563">Оценка</a></span></li></ul>
+            </div>*@
     </div>
 
-    <fieldset class="row mb-3">
-        <legend class="col-form-label col-sm-3 pt-0">Radios</legend>
-        <div class="col-sm-9">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                <label class="form-check-label" for="gridRadios1">
-                    First radio
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                <label class="form-check-label" for="gridRadios2">
-                    Second radio
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                <label class="form-check-label" for="gridRadios3">
-                    Third disabled radio
-                </label>
-            </div>
-        </div>
-    </fieldset>
+
     <div class="row mb-3">
-        <div class="col-sm-9 offset-sm-2">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                <label class="form-check-label" for="gridCheck1">
-                    Example checkbox
-                </label>
-            </div>
-        </div>
+        <a class="btn btn-theme col-3 me-5" asp-action="CreateRaspisan" asp-controller="Course">Сохранить курс</a>
+        <a class="btn btn-theme col-3 me-5" asp-action="CreateRaspisan" asp-controller="Course">Сохранить и заполнить расписание</a>
+        <a class="btn btn-theme col-3 me-5" asp-action="CreateRaspisan" asp-controller="Course">Сохранить и опубликовать</a>
     </div>
-    <button type="submit" class="btn btn-primary" id="Add_Batoon">Добавить курс</button>
+
 
 </div>
 <div id="polygon1"></div>
@@ -422,26 +416,99 @@
 
 
 <!-- Modal загрузка фото -->
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="KategorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
             <form asp-action="AddFile" asp-controller="UploadFile" method="post" enctype="multipart/form-data">
                 <div class="modal-header body">
-                    <h5 class="modal-title" id="exampleModalLabel">Загрузите фотографию</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление категории слушателей</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body body">
-
-                    @*<input type="file" name="uploads" multiple="multiple" /><br>*@
-                    <div class="file-drop-area">
-                        <span class="fake-btn">Выберите файл</span>
-                        <span class="file-msg">или перенесите сюда</span>
-                        <input class="file-input" name="uploads" type="file">
+                    <div class="row">
+                        <label for="inputPassword3" class="col-sm-3 col-form-label">Категории слушателей</label>
+                        <div class="col-sm-9 mt-auto mb-auto">
+                            <input type="text" class="form-control inp-theme" id="inputAddKategor">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer body">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    <button type="button" class="btn btn-primary">Отправить</button>
+                    <button type="button" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade " id="KafedraModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <form asp-action="AddFile" asp-controller="UploadFile" method="post" enctype="multipart/form-data">
+                <div class="modal-header body">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление Кафедры</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body body">
+                    <div class="row">
+                        <label for="inputPassword3" class="col-sm-3 col-form-label">Кафедра</label>
+                        <div class="col-sm-9 mt-auto mb-auto">
+                            <input type="text" class="form-control inp-theme" id="inputAddKafedra">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer body">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " id="PrepodModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <form asp-action="AddFile" asp-controller="UploadFile" method="post" enctype="multipart/form-data">
+                <div class="modal-header body">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление Руководителя курса</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body body">
+                    <div class="row">
+                        <label class="col-12">Если руководителя курсов нет в списке значит ему необходимо пройти регистрацию на сайте <a href="appo.iro23.ru">appo.iro23.ru</a>. Укажите его почту чтобы отправить приглашение на регистрацию</label>
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-7 mt-auto mb-auto">
+                            <input type="text" class="form-control inp-theme" id="inputEmail">
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-info col-12">Отправить</a>
+                        </div>
+                        
+                        <div class="d-flex">
+                          
+                            <hr class="hr col-12" />
+                        </div>
+                        
+                        <label class="col-12">Если руководитель зарегестрирован на сайте, необходимо назначить роль "Руководитель курса" Обратитесь к администратору ил иподайте заявку</label>
+                        <label for="inputPassword3" class="col-sm-2 col-form-label">Пользователи</label>
+                        <div class="col-sm-7">
+                            <select class="selectpicker show-tick form-control inp-theme" id="SelUser" data-container="body" data-live-search="true" title="Выберите руководителя" data-hide-disabled="true">
+
+                                <option value="23">Белай</option>
+                                <option value="69">Ивко</option>
+                                <option value="26">Мокеева</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <a class="btn btn-info col-12">Запросить роль</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer body">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                    
                 </div>
             </form>
         </div>
