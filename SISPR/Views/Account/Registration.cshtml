@@ -108,15 +108,15 @@
             <div class="col-12 col-md-9 row-alt d-none" id="div_second">
                 <h5 class="col-12">Создайте аккаунт ИРО</h5>
                 @*<div class="row m-2">*@
-            <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
-                <div class=" form-floating input-group ">
-                    <input type="text" class="form-control inp-theme" id="regionInput" asp-for="Region.name" onchange="regDa(this.value)" placeholder="Краснодар">
-                    <label for="regionInput">Регион</label>
-                    <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
-                </div>
+                <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                    <div class=" form-floating input-group ">
+                        <input type="text" class="form-control inp-theme" id="regionInput" asp-for="Region.name" onchange="regDa(this.value)" placeholder="Краснодар">
+                        <label for="regionInput">Регион</label>
+                        <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
+                    </div>
                     <input type="hidden" asp-for="Region.search_name" id="regionNoTypeInput">
                     <input type="hidden" asp-for="Region.fias_code" id="regionIdInput">
-                    
+
                     <div class="invalid-feedback">
                         Введите регион
                     </div>
@@ -296,83 +296,83 @@
                 <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
                     <div class=" form-floating input-group ">
                         <input type="text" class="form-control inp-theme " id="moInput" onchange="moDa(this.value)" asp-for="MO.name" placeholder="Краснодар" disabled>
-                        <label for="moInput">МО</label> 
+                        <label for="moInput">МО</label>
                         <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
                     </div>
-                        <input type="hidden" asp-for="MO.searсh_name" id="moNoTypeInput">
-                        <input type="hidden" asp-for="MO.fias_code" id="moIdInput">
-                        
-                        <div class="invalid-feedback">
-                            Введите муниципалитет
-                        </div>
-                        <div class="invalid-feedback " id="moInvDiv">
-                            Муниципальное образование не найдено. Попробуйте ввести заново
-                        </div>
+                    <input type="hidden" asp-for="MO.searсh_name" id="moNoTypeInput">
+                    <input type="hidden" asp-for="MO.fias_code" id="moIdInput">
+
+                    <div class="invalid-feedback">
+                        Введите муниципалитет
                     </div>
-
-
-
-                    <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
-                        <div class=" form-floating input-group ">
-                            <input type="text" class="form-control inp-theme" asp-for="City.name" id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
-                            <label for="cityInput">Населенный пункт</label>
-                            <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
-                        </div>
-                            <input type="hidden" asp-for="City.search_name" id="cityNoTypeInput">
-                            <input type="hidden" asp-for="City.fias_code" id="cityIdInput">
-                           
-                            <div class="invalid-feedback">
-                                Введите населенный пункт
-                            </div>
-                            <div class="invalid-feedback " id="cityInvDiv">
-                                Населенный пункт не найден. Попробуйте ввести заново
-                            </div>
-                        </div>
-                    @*</div>
-        <div class="row m-2">*@
-                    <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
-                        <div class=" form-floating input-group ">
-                            <input type="text" class="form-control inp-theme" asp-for="OO.name" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled> 
-                            <label for="ooInput">Краткое название ОО</label>
-                            <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
-                        </div>
-                            <input type="hidden" asp-for="OO.inn" id="ooInnInput">
-                            <input type="hidden" asp-for="OO.name_short" id="ooNameInput">
-                           
-                            <div class="invalid-feedback">
-                                Введите краткое наименование ОО
-                            </div>
-                            <div class="invalid-feedback " id="ooInvDiv">
-                                Образовательная организация не найдена. Попробуйте ввести заново
-                            </div>
-                        </div>
-                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                        <input type="text" class="form-control inp-theme mask-phone" asp-for="PhoneNumber" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
-                        <label for="telInput">Телефон</label>
-                        <div class="invalid-feedback">
-                            Введите коректный телефон
-                        </div>
+                    <div class="invalid-feedback " id="moInvDiv">
+                        Муниципальное образование не найдено. Попробуйте ввести заново
                     </div>
-                    <script>
-                        $('.mask-phone').mask('+7 (999) 999-99-99');
-                    </script>
-                    <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
-                        <input type="text" class="form-control inp-theme mask-snils" asp-for="SNILS" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}" onblur="CheckSnils(this.value)">
-                        <label for="snilsInput">СНИЛС</label>
-                        <div class="invalid-feedback">
-                            Введите коректный снилс
-                        </div>
-                    </div>
-                    <script>
-                        $('.mask-snils').mask('999-999-999 99');
-                    </script>
-
-                    <a style="flex-direction: column; justify-content: center; display: inline-flex;" onclick="back()" class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
-
-                    <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 " asp-action="Register" asp-controller="Account">Регистрация</button>
-
-
                 </div>
+
+
+
+                <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                    <div class=" form-floating input-group ">
+                        <input type="text" class="form-control inp-theme" asp-for="City.name" id="cityInput" placeholder="Краснодар" onchange="cityDa(this.value)" disabled>
+                        <label for="cityInput">Населенный пункт</label>
+                        <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
+                    </div>
+                    <input type="hidden" asp-for="City.search_name" id="cityNoTypeInput">
+                    <input type="hidden" asp-for="City.fias_code" id="cityIdInput">
+
+                    <div class="invalid-feedback">
+                        Введите населенный пункт
+                    </div>
+                    <div class="invalid-feedback " id="cityInvDiv">
+                        Населенный пункт не найден. Попробуйте ввести заново
+                    </div>
+                </div>
+                @*</div>
+                    <div class="row m-2">*@
+                <div class=" col-12 col-md-6 col-lg-4 pe-md-3">
+                    <div class=" form-floating input-group ">
+                        <input type="text" class="form-control inp-theme" asp-for="OO.name_short" id="ooShortInput" placeholder="СОШ №1" onchange="ooDa(this.value)" disabled>
+                        <label for="ooInput">Краткое название ОО</label>
+                        <span class="input-group-text" id="basic-addon2"><i class="bi-search"></i></span>
+                    </div>
+                    <input type="hidden" asp-for="OO.inn" id="ooInnInput">
+                    <input type="hidden" asp-for="OO.name" id="ooNameInput">
+
+                    <div class="invalid-feedback">
+                        Введите краткое наименование ОО
+                    </div>
+                    <div class="invalid-feedback " id="ooInvDiv">
+                        Образовательная организация не найдена. Попробуйте ввести заново
+                    </div>
+                </div>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme mask-phone" asp-for="PhoneNumber" id="telInput" placeholder="8-999-422-22-11" pattern=".{10,}">
+                    <label for="telInput">Телефон</label>
+                    <div class="invalid-feedback">
+                        Введите коректный телефон
+                    </div>
+                </div>
+                <script>
+                    $('.mask-phone').mask('+7 (999) 999-99-99');
+                </script>
+                <div class="form-floating col-12 col-md-6 col-lg-4 pe-md-3">
+                    <input type="text" class="form-control inp-theme mask-snils" asp-for="SNILS" id="snilsInput" placeholder="111-111-111 11" pattern=".{10,}" onblur="CheckSnils(this.value)">
+                    <label for="snilsInput">СНИЛС</label>
+                    <div class="invalid-feedback">
+                        Введите коректный снилс
+                    </div>
+                </div>
+                <script>
+                    $('.mask-snils').mask('999-999-999 99');
+                </script>
+
+                <a style="flex-direction: column; justify-content: center; display: inline-flex;" onclick="back()" class="btn btn-sm btn-primary col-12 col-md-3 me-auto ">Назад</a>
+
+                <button class="btn btn-lg btn-theme col-12 col-md-3 ms-auto me-md-3 " asp-action="Register" asp-controller="Account">Регистрация</button>
+
+
+            </div>
 
 
 
@@ -427,7 +427,7 @@
                         divKodInvalid.classList.remove("d-block");
                         var pass1 = document.getElementById("passwordInput").value;
                         var pass2 = document.getElementById("passwordCheckInput").value;
-                        if (pass1 == pass2 && pass1.length > 5 && pass2!="") {
+                        if (pass1 == pass2 && pass1.length > 5 && pass2 != "") {
                             var btnNext = document.getElementById("BtnNext");
                             btnNext.classList.remove("disabled");
                         }
@@ -612,10 +612,10 @@
     }
 
     function CheckSnils(snils) {
-        
-       
+
+
         console.log(document.getElementById("snilsInput").validity.rangeUnderflow);
-        if (document.getElementById("snilsInput").validity.valid ==true) {
+        if (document.getElementById("snilsInput").validity.valid == true) {
             jQuery.ajax({
                 url: '/Account/CheckSnilsAjax/',
                 type: "POST",

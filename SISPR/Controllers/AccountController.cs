@@ -113,12 +113,8 @@ namespace SISPR.Controllers
                     model.Region = await ContextDB.Region.FirstAsync(x => x.fias_code == model.Region.fias_code);
                 else
                 {
-
-
                     ContextDB.Region.Add(model.Region);
-
                     ContextDB.SaveChanges();
-
                 }
                 if (await ContextDB.MO.AnyAsync(x => x.fias_code == model.MO.fias_code))
                     model.MO = await ContextDB.MO.FirstAsync(x => x.fias_code == model.MO.fias_code);
