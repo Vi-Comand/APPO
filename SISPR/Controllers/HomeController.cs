@@ -2,9 +2,10 @@
 using Microsoft.Extensions.Logging;
 using SISPR.Models;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SISPR.Controllers
-{
+{[Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

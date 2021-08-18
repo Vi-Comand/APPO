@@ -9,9 +9,14 @@ using SISPR.Models.DataBase.Basic.Location;
 using SISPR.Models.DataBase.Basic.User;
 using SISPR.Models.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 using SISPR.Controllers.Service;
@@ -45,6 +50,17 @@ namespace SISPR.Controllers
             return View();
         }
 
+        //public async Task<IActionResult> Authorization(LoginViewModel Login)
+        //{
+        //    if (Context.Users.Any(x => x.Email.ToLower() == Login.Email.ToLower() && HashPass(Login.Password) == x.PasswordHash))
+        //    {
+        //        return View("~/Views/Home/Index.cshtml");
+        //    }
+        //    else
+        //    {
+        //        return View("Login");
+        //    }
+        //}
 
         public async Task<IActionResult> ConfirmedEmailAjax(string Email)
         {
@@ -208,19 +224,24 @@ namespace SISPR.Controllers
         {
             if (ModelState.IsValid)
             {
+                model.RememberMe = false;
                 var result =
-                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                if (result.Succeeded)
+                    await _signInManager.PasswordSignInAsync(model.Email, HashPass(model.Password), model.RememberMe, false);
+               
+                
+                
+                if (!result.Succeeded)
                 {
                     // проверяем, принадлежит ли URL приложению
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                    {
+                    //if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                    //{
+                    model.ReturnUrl = "https://localhost:44342/Home/Index";
                         return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
+                    //}
+                    //else
+                    //{
+                    //    return RedirectToAction("Index", "Home");
+                    //}
                 }
                 else
                 {
@@ -229,6 +250,21 @@ namespace SISPR.Controllers
             }
             return View(model);
         }
+        private async Task Authenticate(string userName)
+        {
+            // создаем один claim
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
+
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

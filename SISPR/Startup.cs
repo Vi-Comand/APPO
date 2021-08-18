@@ -35,9 +35,9 @@ namespace SISPR
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 26)); // Replace 'YourDbContext' with the name of your own DbContext derived class.
 
             services.AddDbContext<IdentityContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion).EnableSensitiveDataLogging()); // <-- These two calls are optional but help .EnableDetailedErrors() //   );
+            services.AddRazorPages();
 
-
-
+         //   services.AddScoped<TokenProvider>();
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityContext>();
@@ -53,6 +53,9 @@ namespace SISPR
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
+         
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -67,7 +70,6 @@ namespace SISPR
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -75,6 +77,7 @@ namespace SISPR
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
