@@ -6,9 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-using CheckingUTP.Models;
+using SISPR.Models;
 
-namespace CheckingUTP.Controllers
+namespace SISPR.Controllers
 {
     public class UploadFileController : Controller
     {

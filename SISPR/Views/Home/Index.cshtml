@@ -7,96 +7,97 @@
 <div class="text-center row">
     <h1 class="display-4">Добро пожаловать</h1>
     <p>на Портал педагога</p>
-    <div class="row row-cols-1 row-cols-md-3 g-3">
-        <div class="col">
-            <div class="card ">
-                <a asp-action="AddCourse" asp-controller="Course" class="a">
-                    <img src="~/file/b1.jpeg" width="400" height="200" class="card-img-top img-card-home" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title "><b>КУРСЫ</b></h5>
-                        <p class="card-text text-black-100">Регистрация на курсы</p>
+    <a asp-action="Index" asp-controller="UTP" class="a">УТП</a>
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card ">
+                    <a asp-action="AddCourse" asp-controller="Course" class="a">
+                        <img src="~/file/b1.jpeg" width="400" height="200" class="card-img-top img-card-home" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title "><b>КУРСЫ</b></h5>
+                            <p class="card-text text-black-100">Регистрация на курсы</p>
+                        </div>
+                    </a>
+                    <div class="card-footer">
+                        <small class="text-muted">Вы участвуете в <b>2х</b> курсах</small>
                     </div>
-                </a>
-                <div class="card-footer">
-                    <small class="text-muted">Вы участвуете в <b>2х</b> курсах</small>
                 </div>
             </div>
-        </div>
-        <div class="col">
-            <div class="card ">
-                <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">ИОМ</h5>
-                    <p class="card-text">Выша индивидуальная дорожная карта</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Вам нужно выполнить <b>4 шага</b></small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card ">
-                <img src="~/file/b3.png" width="200" height="200" class="card-img-top img-card-home" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Конкурсы</h5>
-                    <p class="card-text">Принять участие в конкурсе</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Вы не участвуете в конкурсе</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-
-
-            <div class="card ">
-                @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
-                <a asp-action="Profile" asp-controller="LK" class="a">
+            <div class="col">
+                <div class="card ">
                     <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
-
                     <div class="card-body">
-                        <h4 class="card-title">Личный кабинет</h4>
-                        <p class="card-text text-black-100">Ваше портфолио и достижения</p>
+                        <h5 class="card-title">ИОМ</h5>
+                        <p class="card-text">Выша индивидуальная дорожная карта</p>
                     </div>
-                </a>
-                <div class="card-footer">
-                    <small class="text-muted">Необходимо загрузить данные</small>
+                    <div class="card-footer">
+                        <small class="text-muted">Вам нужно выполнить <b>4 шага</b></small>
+                    </div>
                 </div>
             </div>
-
-
-        </div>
-        <div class="col">
-
-            <div class="card ">
-                @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
-                <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Основные ресурсы</h5>
-                    <p class="card-text">Сайты</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">iro23.ru </small>
+            <div class="col">
+                <div class="card ">
+                    <img src="~/file/b3.png" width="200" height="200" class="card-img-top img-card-home" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Конкурсы</h5>
+                        <p class="card-text">Принять участие в конкурсе</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Вы не участвуете в конкурсе</small>
+                    </div>
                 </div>
             </div>
+            <div class="col">
 
-        </div>
-        <div class="col">
 
-            <div class="card ">
-                @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
-                <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Мероприятия</h5>
-                    <p class="card-text">Семинары, вэбинары, конференции</p>
+                <div class="card ">
+                    @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
+                    <a asp-action="Profile" asp-controller="LK" class="a">
+                        <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
+
+                        <div class="card-body">
+                            <h4 class="card-title">Личный кабинет</h4>
+                            <p class="card-text text-black-100">Ваше портфолио и достижения</p>
+                        </div>
+                    </a>
+                    <div class="card-footer">
+                        <small class="text-muted">Необходимо загрузить данные</small>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">iro23.ru </small>
-                </div>
+
+
             </div>
+            <div class="col">
 
+                <div class="card ">
+                    @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
+                    <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Основные ресурсы</h5>
+                        <p class="card-text">Сайты</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">iro23.ru </small>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col">
+
+                <div class="card ">
+                    @*<div id="polygon" class="card-img-top img-card-home" style="height:200px"></div>*@
+                    <img src="~/file/b1.jpeg" width="200" height="200" class="card-img-top img-card-home" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Мероприятия</h5>
+                        <p class="card-text">Семинары, вэбинары, конференции</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">iro23.ru </small>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 </div>
 <div id="polygon1"></div>
 <script src="~/js/three.min.js"></script>

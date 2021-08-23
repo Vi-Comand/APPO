@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SISPR.Models.ModelsUTP;
 using static SISPR.Controllers.CheckUTPExcelController;
 
-namespace CheckingUTP.Controllers.Classes.CheckUTPExcelController
+namespace SISPR.Controllers.Classes.CheckUTPExcelController
 {
     public class WorkPropertyUTP
     {
