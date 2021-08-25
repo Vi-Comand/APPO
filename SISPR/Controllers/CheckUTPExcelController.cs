@@ -7,6 +7,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using SISPR.Models.ModelsUTP;
 using SISPR.Controllers.Classes.CheckUTPExcelController;
+using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Http;
+using SISPR.Models;
+
+
+
 namespace SISPR.Controllers
 {
     public class CheckUTPExcelController : Controller
@@ -23,27 +29,51 @@ namespace SISPR.Controllers
 
         //    return Json("Изменения внесены!");
         //}
-        public IActionResult CheckExcel()
+
+        public bool СontainsUTP(ExcelWorksheet Worksheet)
         {
-            string dirName = Directory.GetCurrentDirectory() + "/wwwroot/Files/";
+            foreach (var cell in Worksheet.Cells)
+            {
+                string text = Regex.Replace(cell.Text.ToString().ToUpper(), @"^[a-zA-Z]+$",string.Empty);
+               if (text == "ТИПОВОЙ УЧЕБНЫЙ ПЛАН")
+                {
+                    return true;
+                    
+                }
+            }
+
+            return false;
+        }
+
+
+        public async Task<IActionResult> AddUTP(IFormFile upload)
+        {
+            UploadFileController uploadFile = new UploadFileController();
+           
+           
+            return View("~/Views/UTP/CheckUTPExcel/UTPViews.cshtml", CheckExcel(Directory.GetCurrentDirectory() + await uploadFile.AddFile(upload)));
+        }
+
+        public UTP CheckExcel(string path)
+        {
+           
             UTP uTP = new UTP();
 
 
             List<TableModel> listTable = new List<TableModel>();
-            if (Directory.Exists(dirName))
-            {
-                string[] files = Directory.GetFiles(dirName);
-                foreach (string s in files)
-                {
 
-                    using (var pck = new OfficeOpenXml.ExcelPackage())
+
+            using (var pck = new OfficeOpenXml.ExcelPackage())
+            {
+                FileInfo existingFile = new FileInfo(path);
+                //uTP.propertyUTP.Name 
+                using (ExcelPackage package = new ExcelPackage(existingFile))
+                {
+                    foreach (ExcelWorksheet worksheet in package.Workbook.Worksheets)
+                    //get the first worksheet in the workbook
                     {
-                        FileInfo existingFile = new FileInfo(s);
-                        //uTP.propertyUTP.Name 
-                        using (ExcelPackage package = new ExcelPackage(existingFile))
+                        if (СontainsUTP(worksheet))
                         {
-                            //get the first worksheet in the workbook
-                            ExcelWorksheet worksheet = package.Workbook.Worksheets.First();
                             var colRow = worksheet.Dimension.End.Row;
                             var Table = InfoTable(worksheet, colRow);
                             listTable.Add(Table);
@@ -51,19 +81,17 @@ namespace SISPR.Controllers
                     }
                 }
             }
+                     
+            
 
             WorkPropertyUTP workProperty = new WorkPropertyUTP();
             uTP.propertyUTP = workProperty.GetPropertyUTP(propUTP);
             uTP.table=listTable;
-            if (listTable.Count != 0)
-            {
-                return View("UTPViews", uTP);
 
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+              return  uTP;
+
+            
+          
         }
 
         public class ModelVrem
@@ -96,7 +124,7 @@ public TableModel InfoTable(ExcelWorksheet sheet, int colRow)
                 {
                     propUTP.Add(new ModelVrem { str1 = sheet.Cells[i, 1].Text, str2 = sheet.Cells[i, 2].Text });
                 }
-                if (sheet.Cells[i, 1].Text == "Вид учебной работы")
+                if (sheet.Cells[i, 1].Text == "Вид учебной работы" || sheet.Cells[i, 1].Text == "Вид учебной нагрузки")
                 {
                     endTable = i;
                     startTableBool = false;
