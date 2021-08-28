@@ -74,6 +74,8 @@ namespace SISPR.Controllers
                     {
                         if (СontainsUTP(worksheet))
                         {
+                            uTP.propertyUTP = PropertyFill(worksheet);
+
                             var colRow = worksheet.Dimension.End.Row;
                             var Table = InfoTable(worksheet, colRow);
                             listTable.Add(Table);
@@ -84,8 +86,8 @@ namespace SISPR.Controllers
                      
             
 
-            WorkPropertyUTP workProperty = new WorkPropertyUTP();
-            uTP.propertyUTP = workProperty.GetPropertyUTP(propUTP);
+            //WorkPropertyUTP workProperty = new WorkPropertyUTP();
+           
             uTP.table=listTable;
 
               return  uTP;
@@ -94,12 +96,66 @@ namespace SISPR.Controllers
           
         }
 
+        private PropertyUTP PropertyFill(ExcelWorksheet Worksheet)
+        {
+            PropertyUTP propertyUTP = new PropertyUTP();
+            var xz = Worksheet.Cells.ToArray();
+            int index = 0;
+            foreach (var cell in xz)
+            {
+                
+                if (Regex.Replace(cell.Text.ToString().ToUpper(), "[^а-яА-Я]", string.Empty) == Regex.Replace("Количество слушателей в группе:".ToUpper(), "[^а-яА-Я]", string.Empty) )
+                {
+                    propertyUTP.Kol_slushatel_v_group =int.Parse( xz[index+1].Text);
+;
+                }
+                if (Regex.Replace(cell.Text.ToString().ToUpper(), "[^а-яА-Я]", string.Empty) == Regex.Replace("Количество групп".ToUpper(), "[^а-яА-Я]", string.Empty))
+                {
+                    propertyUTP.Kol_groups = int.Parse(xz[index + 1].Text);
+                    
+                }
+                if (Regex.Replace(cell.Text.ToString().ToUpper(), "[^а-яА-Я]", string.Empty) == Regex.Replace("Форма обучения".ToUpper(), "[^а-яА-Я]", string.Empty))
+                {
+                    propertyUTP.Forma_obuchen = xz[index + 1].Text;
+                    
+                }
+                if (Regex.Replace(cell.Text.ToString().ToUpper(), "[^а-яА-Я]", string.Empty) == Regex.Replace("Режим занятий".ToUpper(), "[^а-яА-Я]", string.Empty))
+                {
+                    propertyUTP.Rejim_zanyati = int.Parse(Regex.Replace(xz[index + 1].Text.ToString().ToUpper(), "[^0-9]", string.Empty));
+                    
+                }
+                //if (Regex.Replace(cell.Text.ToString().ToUpper(), "[^а-яА-Я]", string.Empty) == Regex.Replace("Количество слушателей в группе:".ToUpper(), "[^а-яА-Я]", string.Empty))
+                //{
+                //    propertyUTP.Kol_slushatel_v_group = int.Parse(xz[index + 1].Text);
+
+
+                //}
+
+
+                if (cell.Text == "Вид учебной работы" || cell.Text == "Вид учебной нагрузки")
+                {
+                    break;
+
+
+                }
+
+
+
+
+                index++;
+            }
+
+            return propertyUTP;
+        }
+
+
+
         public class ModelVrem
         {
           public  string str1 { get; set; }
             public string str2 { get; set; }
         }
-public TableModel InfoTable(ExcelWorksheet sheet, int colRow)
+        public TableModel InfoTable(ExcelWorksheet sheet, int colRow)
         {
 
 
