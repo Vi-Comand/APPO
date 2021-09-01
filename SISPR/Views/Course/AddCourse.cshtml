@@ -1,7 +1,8 @@
-﻿@model SISPR.Models.ErrorViewModel
+﻿@model SISPR.Models.ViewModels.AddCourseViewModel
+
+
 @{
     ViewData["Title"] = "Добавить курс";
-
 }
 
 <div class="col-12 shadow p-3 mb-5 bg-white rounded ">
@@ -12,18 +13,18 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">УТП</label>
                 <div class="col-sm-9">
-                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
-                        <option selected>Выберите УТП</option>
-                        <option value="23">Униф. УП 8 часа ДО вх</option>
-                        <option value="69">Униф. УП 48 часа </option>
-                        <option value="26">Униф. УП 108 часа ДО вх</option>
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput" asp-for="utp_id">
+                        @foreach (var utp in Model.ListUtp)
+                        {
+                            <option value=@utp.utp_id>@utp.name</option>
+                        }
                     </select>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Форма обучения</label>
                 <div class="col-sm-9">
-                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput" asp-for="budjet_vnebudjet">
                         <option selected>Выберите форму обучения</option>
                         <option value="23">Бюджетная</option>
                         <option value="69">Внебюджетная</option>
@@ -33,7 +34,7 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">ПК/ПКП</label>
                 <div class="col-sm-9">
-                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput">
+                    <select class="form-select inp-theme" aria-label="УТП" id="regionInput" asp-for="pp_pkp">
                         <option selected>Выберите </option>
                         <option value="23">Повышение квалификации</option>
                         <option value="69">Переподготовка</option>
@@ -43,11 +44,11 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
                 <div class="col-sm-9">
-                    <input type="date" class="form-control inp-theme" id="dateN" required onchange="var dk = document.getElementById('dateK').value; if (dk != 0) {if(this.value>= dk){alert('Дата окончания меньше или равна дате начала');} }">
+                    <input asp-for="date_start" type="date" class="form-control inp-theme" id="dateN" required onchange="var dk = document.getElementById('dateK').value; if (dk != 0) {if(this.value>= dk){alert('Дата окончания меньше или равна дате начала');} }">
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
+                <label asp-for="date_end" for="inputPassword3" class="col-sm-3 col-form-label">Дата начала</label>
                 <div class="col-sm-9">
                     <input type="date" class="form-control inp-theme" id="dateK" required onblur="var dn = document.getElementById('dateN').value; if (this.value <= dn) {
     alert('Дата окончания меньше или равна дате начала');  }">
@@ -69,14 +70,14 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Реализация ДПП ПК</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                    <input asp-for="dpp_pk" type="text" class="form-control inp-theme" id="inputEmail3">
                 </div>
             </div>
 
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Тема курсов</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="address">
+                    <input asp-for="tema" type="text" class="form-control inp-theme" id="address">
                 </div>
             </div>
             @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -103,7 +104,7 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Объем курсов</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme ">
+                    <input asp-for="kol_hour" type="text" class="form-control inp-theme ">
                 </div>
 
             </div>
@@ -146,11 +147,11 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Место проведения</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control inp-theme" @*asp-for="City.name"*@ id="cityInput" placeholder="Кущевский район, Красное" onchange="cityDa(this.value)">
+                    <input asp-for="City.name" type="text" class="form-control inp-theme" id="cityInput" placeholder="Кущевский район, Красное" onchange="cityDa(this.value)">
                     <input type="hidden" @*asp-for="City.search_name"*@ id="cityNoTypeInput">
                     <input type="hidden" @*asp-for="City.fias_code"*@ id="cityIdInput">
                     @*Класный селект Не удалять
-                        *@
+                    *@
                     <div class="invalid-feedback " id="cityInvDiv">
                         Населенный пункт не найден. Попробуйте ввести заново
                     </div>
@@ -158,40 +159,40 @@
                 <div class="col-sm-2">
                     <a class="btn btn-info col-12"><i class="bi-search"></i></a>
                 </div>
-                
+
             </div>
 
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Квота</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control inp-theme" id="inputEmail3">
+                    <input asp-for="kvota" type="text" class="form-control inp-theme" id="inputEmail3">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. групп</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control inp-theme" id="inputEmail3" value="1">
+                    <input asp-for="kol_group" type="number" class="form-control inp-theme" id="inputEmail3" value="1">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. подгрупп</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control inp-theme" id="inputEmail3" value="0">
+                    <input asp-for="kol_pod_group" type="number" class="form-control inp-theme" id="inputEmail3" value="0">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кол. слушателей в группе</label>
                 <div class="col-sm-9">
-                    <input type="number" class="form-control inp-theme" id="inputEmail3" value="25">
+                    <input asp-for="kol_sluhatel" type="number" class="form-control inp-theme" id="inputEmail3" value="25">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Категория слушателей</label>
                 <div class="col-sm-7">
-                    <select class="selectpicker show-tick form-control inp-theme" multiple id="SelKategor" data-container="body" data-live-search="true" title="Выберите категорию" data-hide-disabled="true">
-                        <option >Учителя русского языка</option>
+                    <select asp-for="Category_student.name" class="selectpicker show-tick form-control inp-theme" multiple id="SelKategor" data-container="body" data-live-search="true" title="Выберите категорию" data-hide-disabled="true">
+                        <option>Учителя русского языка</option>
                         <option>Преподаватели</option>
-                        <option >Воспитатили</option>
+                        <option>Воспитатили</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
@@ -201,8 +202,8 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Кафедра</label>
                 <div class="col-sm-7">
-                    <select class="selectpicker show-tick form-control inp-theme" id="SelKafedra" data-container="body" data-live-search="true" title="Выберите кафедру" data-hide-disabled="true">
-                        
+                    <select asp-for="Kafedra.name" class="selectpicker show-tick form-control inp-theme" id="SelKafedra" data-container="body" data-live-search="true" title="Выберите кафедру" data-hide-disabled="true">
+
                         <option value="23">КФО</option>
                         <option value="69">ИАЦ</option>
                         <option value="26">КМИ</option>
@@ -215,8 +216,8 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Руководитель курса</label>
                 <div class="col-sm-7">
-                    <select class="selectpicker show-tick form-control inp-theme" id="SelRukovod" data-container="body" data-live-search="true" title="Выберите руководителя" data-hide-disabled="true">
-                       
+                    <select asp-for="User.f" class="selectpicker show-tick form-control inp-theme" id="SelRukovod" data-container="body" data-live-search="true" title="Выберите руководителя" data-hide-disabled="true">
+
                         <option value="23">Белай</option>
                         <option value="69">Ивко</option>
                         <option value="26">Мокеева</option>
@@ -229,7 +230,7 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Телефон</label>
                 <div class="col-sm-6">
-                    <input type="tel" class="form-control inp-theme" disabled id="inputEmail3" value="8-961-4545-573-457">
+                    <input asp-for="User.PhoneNumber" type="tel" class="form-control inp-theme" disabled id="inputEmail3" value="8-961-4545-573-457">
                 </div>
                 <div class="col-sm-3">
                     <a class="btn btn-info col-12" data-bs-toggle="modal" data-bs-target="#exampleModal">Изменить</a>
@@ -238,7 +239,7 @@
             <div class="row mb-3">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Краткое описание</label>
                 <div class="col-sm-9">
-                    <textarea class="form-control inp-theme" id="inputEmail3" rows="7"></textarea>
+                    <textarea asp-for="opisanie" class="form-control inp-theme" id="inputEmail3" rows="7"></textarea>
                 </div>
             </div>
 
@@ -485,12 +486,12 @@
                         <div class="col-sm-3">
                             <a class="btn btn-info col-12">Отправить</a>
                         </div>
-                        
+
                         <div class="d-flex">
-                          
+
                             <hr class="hr col-12" />
                         </div>
-                        
+
                         <label class="col-12">Если руководитель зарегестрирован на сайте, необходимо назначить роль "Руководитель курса" Обратитесь к администратору ил иподайте заявку</label>
                         <label for="inputPassword3" class="col-sm-2 col-form-label">Пользователи</label>
                         <div class="col-sm-7">
@@ -508,7 +509,7 @@
                 </div>
                 <div class="modal-footer body">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                    
+
                 </div>
             </form>
         </div>
