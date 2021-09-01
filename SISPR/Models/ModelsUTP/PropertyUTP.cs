@@ -8,6 +8,7 @@ namespace SISPR.Models.ModelsUTP
         public float Hour { get; set; }
         public int Kol_slushatel_v_group { get; set; }
         public int Kol_groups { get; set; }
+        public int Kol_subgroups { get; set; }
         public int Rejim_zanyati { get; set; }
         public string Forma_obuchen { get; set; }
 

@@ -11,246 +11,301 @@
 <div class="row">
  
 @{int a = 0;}
-<div class="area col-6 shadow-lg border text-center" id="ar0">
-  @foreach (TableModel table in Model.table)
-  {
-   
-    @for (int i = 0; i < table.Row.Count; i++)
-    {
-      if (table.Row[@i].Type == 0)
-      {
-
-
-        var row = table.Row[@i];
-
-      
-
-          <div class="shadow" id="el-@a" draggable="true">
-
-
-            <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
-
-             <tr>
-                <td width="100">
-                                <input type="text"  onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
-                </td>
-                <td width="20">
-                          <input type="text"  onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
-                </td>
-                <td width="20">
-                               <input type="text" onchange="SaveOnChange(@row.ID,3, this.value)" value= '@row.NumberGroups'>
-                </td>
-                <td width="20">
-                                          <input type="text"  onchange="SaveOnChange(@row.ID,4, this.value)" value=  '@row.NumberSubgroups'>
-                </td>
-                <td width="20">
-                                     <input type="text"  onchange="SaveOnChange(@row.ID,5, this.value)" value= '@row.NumberControlForms'>
-                </td>
-                <td width="20">
-                                                 <input type="text"  onchange="SaveOnChange(@row.ID,6, this.value)" value= '@row.NumberListeners'>
-                </td>
-                <td width="20">
-                                <input type="text" onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
-                </td>
-                <td width="40"> 
-                  
-                    @row.Status </td>
-              </tr>
-            </table>
-
-          </div>
-          a++;
-
-        
-
-      }
-    }
- 
-    }</div>
-
-
-
-<div class="col-6">
-
-
-
-
-
-
-
-  <div class="area col-12 shadow-lg border text-center" id="ar1"> @foreach (TableModel table in Model.table)
-    {
-     
-      @for (int i = 0; i < table.Row.Count; i++)
-      {
-        if (table.Row[@i].Type == 3)
+    <div class="area col-6 shadow-lg border text-center" id="ar0">
+        @foreach (TableModel table in Model.table)
         {
 
+            @for (int i = 0; i < table.Row.Count; i++)
+            {
+                if (table.Row[@i].Type == 0)
+                {
 
-          var row = table.Row[@i];
 
-          @if (row.NameTypeTrainingLoad != "Всего часов :")
-          {
+                    var row = table.Row[@i];
+
+
 
                     <div class="shadow" id="el-@a" draggable="true">
 
 
-                      <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
+                        <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
 
-             <tr>
-                <td width="100">
-                                        <input type="text"  onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
-                </td>
-                <td width="20">
-                                  <input type="text"  onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
-                </td>
-                <td width="20">
-                                 <input type="text" onchange="SaveOnChange(@row.ID,3, this.value)" value= '@row.NumberGroups'>
-                </td>
-                <td width="20">
-                                            <input type="text"  onchange="SaveOnChange(@row.ID,4, this.value)" value=  '@row.NumberSubgroups'>
-                </td>
-                <td width="20">
-                                       <input type="text"  onchange="SaveOnChange(@row.ID,5, this.value)" value= '@row.NumberControlForms'>
-                </td>
-                <td width="20">
-                                             <input type="text"  onchange="SaveOnChange(@row.ID,6, this.value)" value= '@row.NumberListeners'>
-                </td>
-                <td width="20">
-                                  <input type="text" onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
-                </td>
-                <td width="40"> 
-                  
-                    @row.Status </td>
-              </tr>
-                      </table>
+                            <tr>
+                                <td width="100">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
+                                </td>
+                                <td width="20">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
+                                </td>
+                                <td width="20">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,3, this.value)" value='@row.NumberGroups'>
+                                </td>
+                                <td width="20">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,4, this.value)" value='@row.NumberSubgroups'>
+                                </td>
+                                <td width="20">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,5, this.value)" value='@row.NumberControlForms'>
+                                </td>
+                                <td width="20">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,6, this.value)" value='@row.NumberListeners'>
+                                </td>
+                                <td width="20">
+                                    <input type="text" onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
+                                </td>
+                                <td width="40"> @row.Status </td>
+                            </tr>
+                        </table>
 
                     </div>
-            a++;
+                    a++;
 
-          }
+
+
+                }
+            }
 
         }
 
-      }
-    }</div>
-  <div class="area col-12 shadow-lg border text-center" id="ar2"> 
-  @foreach (TableModel table in Model.table)
-  {
-   
-    @for (int i = 0; i < table.Row.Count; i++)
-    {
-      if (table.Row[@i].Type == 1)
-      {
-
-
-        var row = table.Row[@i];
-
-      
-
-          <div class="shadow" id="el-@a" draggable="true">
-
-
-            <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
-
-             <tr>
-                <td width="100">
-                    <input type="text"  onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
-                </td>
-                <td width="20">
-                <input type="text"  onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
-                </td>
-                <td width="20">
-                <input type="text" onchange="SaveOnChange(@row.ID,3, this.value)" value= '@row.NumberGroups'>
-                </td>
-                <td width="20">
-               <input type="text"  onchange="SaveOnChange(@row.ID,4, this.value)" value=  '@row.NumberSubgroups'>
-                </td>
-                <td width="20">
-                <input type="text"  onchange="SaveOnChange(@row.ID,5, this.value)" value= '@row.NumberControlForms'>
-                </td>
-                <td width="20">
-                <input type="text"  onchange="SaveOnChange(@row.ID,6, this.value)" value= '@row.NumberListeners'>
-                </td>
-                <td width="20">
-                                <input type="text" onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
-                </td>
-                <td width="40"> 
-                  
-                    @row.Status </td>
-              </tr>
-            </table>
-
-          </div>
-          a++;
-
-        
-
-      }
-    }
-  }
-  
-  </div>
-  <div class="area col-12 shadow-lg border text-center" id="ar3"> 
-    @foreach (TableModel table in Model.table)
-  {
-    
-    @for (int i = 0; i < table.Row.Count; i++)
-    {
-      if (table.Row[@i].Type == 2)
-      {
-
-
-        var row = table.Row[@i];
-
-     
-          <div class="shadow" id="el-@a" draggable="true"  =SaveOnChange(ID, Type)> 
-
-
-            <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
-
-                  <tr>
-                    <td width="100">
-                            <input type="text" onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
-                    </td>
-                    <td width="20">
-                    <input type="text" onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
-                    </td>
-                    <td width="20">
-                   <input type="text" onchange="SaveOnChange(@row.ID,3, this.value)" value='@row.NumberGroups'>
-                    </td>
-                    <td width="20">
-                    <input type="text" onchange="SaveOnChange(@row.ID,4, this.value)" value='@row.NumberSubgroups'>
-                    </td>
-                    <td width="20">
-                   <input type="text" onchange="SaveOnChange(@row.ID,5, this.value)" value='@row.NumberControlForms'>
-                    </td>
-                    <td width="20">
-                   <input type="text" onchange="SaveOnChange(@row.ID,6, this.value)" value='@row.NumberListeners'>
-                    </td>
-                    <td width="20">
-                            <input type="text" onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
-                    </td>
-                    <td width="40">
-
-                    @row.Status </td>
-                  </tr>
-            </table>
-
-          </div>
-          a++;
-
-        
-
-      }
-    }
-  }</div>
 
 
 
-</div>
-</div>
+    </div>
+
+
+
+    <div class="col-6">
+
+
+
+
+        <div class="row align-items-start">
+
+
+            <div class="area col-12 shadow-lg border text-center" id="ar1">
+                @foreach (TableModel table in Model.table)
+                {
+
+                    @for (int i = 0; i < table.Row.Count; i++)
+                    {
+                        if (table.Row[@i].Type == 3)
+                        {
+
+
+                            var row = table.Row[@i];
+
+                            @if (row.NameTypeTrainingLoad != "Всего часов :")
+                            {
+
+                                <div class="shadow" id="el-@a" draggable="true">
+
+
+                                    <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
+
+                                        <tr>
+                                            <td width="100">
+                                                <input type="text"class="input" onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
+                                            </td>
+                                            <td width="20">
+                                                <input type="text" class="input"onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
+                                            </td>
+                                            <td width="20">
+                                                <input type="text"class="input" onchange="SaveOnChange(@row.ID,3, this.value)" value='@row.NumberGroups'>
+                                            </td>
+                                            <td width="20">
+                                                <input type="text" class="input"onchange="SaveOnChange(@row.ID,4, this.value)" value='@row.NumberSubgroups'>
+                                            </td>
+                                            <td width="20">
+                                                <input type="text" class="input"onchange="SaveOnChange(@row.ID,5, this.value)" value='@row.NumberControlForms'>
+                                            </td>
+                                            <td width="20">
+                                                <input type="text" class="input"onchange="SaveOnChange(@row.ID,6, this.value)" value='@row.NumberListeners'>
+                                            </td>
+                                            <td width="20">
+                                                <input type="text" class="input"onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
+                                            </td>
+                                            <td width="40">
+
+                                                @row.Status
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+                                a++;
+
+                            }
+
+                        }
+
+                    }
+                }
+
+                </div>
+
+
+                <div class="row align-items-end">
+
+                    <table id="sumar1"class="table table-hover  table-sm table-bordered shadow ">
+
+                        <tr>
+                            <td width="100">
+                                <input type="text" onchange="SaveOnChange()" >
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="area col-12 shadow-lg border text-center" id="ar2">
+                @foreach (TableModel table in Model.table)
+                {
+
+                    @for (int i = 0; i < table.Row.Count; i++)
+                    {
+                        if (table.Row[@i].Type == 1)
+                        {
+
+
+                            var row = table.Row[@i];
+
+
+
+                            <div class="shadow" id="el-@a" draggable="true">
+                            
+                                <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
+
+                                    <tr>
+                                        <td width="100">
+                                            <input type="text" class="input" onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text"class="input" onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,3, this.value)" value='@row.NumberGroups'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text"class="input" onchange="SaveOnChange(@row.ID,4, this.value)" value='@row.NumberSubgroups'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,5, this.value)" value='@row.NumberControlForms'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,6, this.value)" value='@row.NumberListeners'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text"class="input" onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
+                                        </td>
+                                        <td width="40">
+
+                                            @row.Status
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            a++;
+
+
+
+                        }
+                    }
+                }
+
+            </div>
+            <div class="area col-12 shadow-lg border text-center" id="ar3">
+                @foreach (TableModel table in Model.table)
+                {
+
+                    @for (int i = 0; i < table.Row.Count; i++)
+                    {
+                        if (table.Row[@i].Type == 2)
+                        {
+
+
+                            var row = table.Row[@i];
+
+
+                            <div class="shadow" id="el-@a" draggable="true" >
+
+
+                                <table class="table table-hover  table-sm table-bordered shadow" style="table-layout: fixed">
+
+                                    <tr>
+                                        <td width="100">
+                                            <input type="text"class="input" onchange="SaveOnChange(@row.ID,1, this.value)" value='@row.NameTypeTrainingLoad'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,2, this.value)" value='@row.NumberHours'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text"class="input" onchange="SaveOnChange(@row.ID,3, this.value)" value='@row.NumberGroups'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text"class="input" onchange="SaveOnChange(@row.ID,4, this.value)" value='@row.NumberSubgroups'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,5, this.value)" value='@row.NumberControlForms'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,6, this.value)" value='@row.NumberListeners'>
+                                        </td>
+                                        <td width="20">
+                                            <input type="text" class="input"onchange="SaveOnChange(@row.ID,7, this.value)" value='@row.VolumeHours'>
+                                        </td>
+                                        <td width="40">
+
+                                            @row.Status
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            a++;
+
+
+
+                        }
+                    }
+                }
+            </div>
+
+
+
+        </div>
+    </div>
 <script>
+
+    c
+    window.onload = function () {
+        matchesVsego();
+    }
+
+    function matchesVsego() {
+        for (var i = 1; i < 4;i++) {
+           
+            alert(matches(document.getElementById('ar' + i)));
+        }
+    }
+
+    function matches(div) {
+   
+        let tables = div.getElementsByClassName('table');
+
+       
+        for (let table of tables) {
+        
+            let cells = div.getElementsByClassName("input");
+         
+            for (let cell of cells) {
+            }
+                
+        }
+
+        return "dasda";
+    }
+
+    
 
   function SaveOnChange(ID, Type,Value) {
     
@@ -269,13 +324,16 @@
   </script>
 
 <style>
-  .elem {
-    width: 600px;
-    height: 250px;
-    margin: 10px auto;
-    text-align: center;
-    /*line-height: 250px;*/
-  }
+
+   
+
+    .elem {
+        width: 600px;
+        height: 250px;
+        margin: 10px auto;
+        text-align: center;
+        /*line-height: 250px;*/
+    }
 
   .area {
     /* width: 600px;*/
@@ -285,12 +343,6 @@
     padding: 10px;
   }
 </style>
-
-
-
-
-
-
 
 <script>
 
